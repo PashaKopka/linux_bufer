@@ -3,9 +3,33 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
+from PyQt5.QtWidgets import QPushButton
 
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
+
+
+class ShortCutFactory:
+
+	def __init__(self, hotkey: str, function):
+		self.hotkey = hotkey
+		self.function = function
+		self.activate()
+
+	def call_function(self):
+		# Send function calling to main thread
+		pass
+
+	def activate(self):
+		def for_canonical(function):
+			return lambda args: function(listener.canonical(args))
+
+		activate_window_shortcut = keyboard.HotKey(keyboard.HotKey.parse(self.hotkey), self.function)
+		listener = keyboard.Listener(
+			on_press=for_canonical(activate_window_shortcut.press),
+			on_release=for_canonical(activate_window_shortcut.release)
+		)
+		listener.start()
 
 
 class MainWindow(QtWidgets.QWidget):
@@ -15,30 +39,33 @@ class MainWindow(QtWidgets.QWidget):
 		self.ui = MainUI()
 		self.ui.setupUi(self)
 
+		self.shortcuts = {
+			'<cmd>+v': self.show_window,
+			'<ctrl>+c': self.add_buffer_union
+		}
+
 		# set window parameters
 		self._setup_window()
 
-		# activate shortcut listening
-		self.shortcut()
+		# activate shortcuts listening
+		self._activate_shortcuts()
 
-	def show_window(self):
+	def show_window(self, *args, **kwargs):
 		position = QCursor.pos()
 		self.move(position)
 		self.show()
 		self.activateWindow()
 
-	def shortcut(self):
-		def for_canonical(function):
-			return lambda args: function(listener.canonical(args))
+	def add_buffer_union(self, *args, **kwargs):
+		l = self.ui.scrollAreaWidgetContents.layout()
+		b = QPushButton('New Button', self.ui.scrollAreaWidgetContents)
+		l.addWidget(b)
 
-		shortcut = keyboard.HotKey(keyboard.HotKey.parse('<cmd>+v'), self.show_window)
-		listener = keyboard.Listener(
-			on_press=for_canonical(shortcut.press),
-			on_release=for_canonical(shortcut.release)
-		)
-		listener.start()
+	def _activate_shortcuts(self):
+		for hotkey, function in self.shortcuts.items():
+			ShortCutFactory(hotkey, function)
 
-	def _setup_window(self) -> None:
+	def _setup_window(self):
 		flags = Qt.FramelessWindowHint
 		flags |= Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
@@ -54,6 +81,5 @@ if __name__ == '__main__':
 	app = QtWidgets.QApplication([])
 
 	application = MainWindow()
-	application.show()  # TODO temp
 
 	sys.exit(app.exec())
