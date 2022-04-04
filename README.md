@@ -1,12 +1,7 @@
 # linux_bufer
 
-```console
->>> pyuic5 interface/main.ui > ui/main.py
-```
-
-```console
->>> i686-w64-mingw32-gcc-win32
-```
+    $ pyuic5 interface/main.ui > ui/main.py
+    $ i686-w64-mingw32-gcc-win32
 
 ### Colors:
 

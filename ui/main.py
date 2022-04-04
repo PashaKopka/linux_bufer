@@ -149,6 +149,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.frame)
 
         self.retranslateUi(Form)
+        self.pasteObject1_16.clicked.connect(Form.hide) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.scrollArea, self.pushButton_2)
         Form.setTabOrder(self.pushButton_2, self.pushButton)

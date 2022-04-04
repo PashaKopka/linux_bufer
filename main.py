@@ -3,7 +3,6 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QPushButton
 
 from clipboard_union import ClipboardUnion
 from ui.main import Ui_Form as MainUI
@@ -44,9 +43,11 @@ class MainWindow(QtWidgets.QWidget):
 		self.ui = MainUI()
 		self.ui.setupUi(self)
 
+		# some variables
 		self.shortcuts = {
 			'<cmd>+v': self.show_window,
 		}
+		self._data = []
 
 		# set window parameters
 		self._setup_window()
@@ -68,7 +69,7 @@ class MainWindow(QtWidgets.QWidget):
 		# adding buffer union to interface
 		# function calling by shortcut
 		layout = self.ui.scrollAreaWidgetContents.layout()
-		union = ClipboardUnion(clipboard_data, self.ui.scrollAreaWidgetContents)
+		union = ClipboardUnion(clipboard_data, self.ui.scrollAreaWidgetContents, self)
 		layout.insertWidget(0, union)
 
 	def _activate_shortcuts(self):
@@ -85,6 +86,7 @@ class MainWindow(QtWidgets.QWidget):
 
 	def event(self, event: QtCore.QEvent) -> bool:
 		if event.type() == QtCore.QEvent.WindowDeactivate:
+			# when click out of window
 			self.hide()
 		return super().event(event)
 
@@ -92,7 +94,9 @@ class MainWindow(QtWidgets.QWidget):
 		# Now handling only text
 		# TODO handle images also
 		data = self._clipboard.text()
-		self._add_clipboard_union(clipboard_data=data)
+		if data not in self._data:
+			self._data.append(data)
+			self._add_clipboard_union(clipboard_data=data)
 
 
 if __name__ == '__main__':

@@ -1,13 +1,31 @@
+import time
+
+import pyperclip
 from PyQt5 import QtWidgets, QtCore, QtGui
+from pynput import keyboard
 
 
 class ClipboardUnion(QtWidgets.QPushButton):
 
-	def __init__(self, text: str, parent: QtWidgets.QWidget):
+	def __init__(self, text: str, parent: QtWidgets.QWidget, parent_window: QtWidgets.QWidget):
 		super().__init__(parent)
 		# TODO if text hasn`t \n -> text on many lines; else -> one line
 		self.setText(text)
 		self._normalize_widget()
+		self.clicked.connect(self._paste)
+
+		self._text = text
+		self._parent_window = parent_window  # Need parent window to hiding it
+
+	def _paste(self):
+		pyperclip.copy(self._text)
+		self._parent_window.hide()
+
+		keyboard_controller = keyboard.Controller()
+		time.sleep(.01)  # Time to window hiding
+		with keyboard_controller.pressed(keyboard.Key.ctrl):
+			keyboard_controller.press('v')
+			keyboard_controller.release('v')
 
 	def _normalize_widget(self):
 		self.setMinimumSize(QtCore.QSize(0, 100))

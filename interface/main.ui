@@ -297,5 +297,22 @@ aaaaaaaaaaaaaaaaaaaaaaaa</string>
   <tabstop>pasteObject1_16</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pasteObject1_16</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
