@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 
-class BufferUnionUi(QtWidgets.QPushButton):
+class ClipboardUnion(QtWidgets.QPushButton):
 
 	def __init__(self, text: str, parent: QtWidgets.QWidget):
 		super().__init__(parent)
