@@ -269,6 +269,64 @@ aaaaaaaaaaaaaaaaaaaaaaaa</string>
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pasteObject1_7">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>265</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="accessibleDescription">
+             <string/>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 2px solid #313131;
+	color: #fff;
+	border-radius: 10px;
+	background-color: #414141;
+	text-align:center;
+	padding: 5px;
+	vertical-align: text-top;
+	qproperty-icon: url('/home/pasha/Pictures/IMG_20210903_183721.jpg');
+}
+
+QPushButton:hover{
+	border: 2px solid #08ffc8;
+}
+
+QPushButton:pressed{
+	background-color: #313131;
+	border: 2px solid #08ffc8;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>200</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

@@ -142,6 +142,36 @@ class Ui_Form(object):
         self.pasteObject1_16.setCheckable(True)
         self.pasteObject1_16.setObjectName("pasteObject1_16")
         self.verticalLayout_2.addWidget(self.pasteObject1_16)
+        self.pasteObject1_7 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.pasteObject1_7.setMinimumSize(QtCore.QSize(0, 100))
+        self.pasteObject1_7.setMaximumSize(QtCore.QSize(265, 16777215))
+        self.pasteObject1_7.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.pasteObject1_7.setAccessibleDescription("")
+        self.pasteObject1_7.setStyleSheet("QPushButton{\n"
+"    border: 2px solid #313131;\n"
+"    color: #fff;\n"
+"    border-radius: 10px;\n"
+"    background-color: #414141;\n"
+"    text-align:center;\n"
+"    padding: 5px;\n"
+"    vertical-align: text-top;\n"
+"    qproperty-icon: url(\'/home/pasha/Pictures/IMG_20210903_183721.jpg\');\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    border: 2px solid #08ffc8;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    background-color: #313131;\n"
+"    border: 2px solid #08ffc8;\n"
+"}")
+        self.pasteObject1_7.setText("")
+        self.pasteObject1_7.setIconSize(QtCore.QSize(200, 100))
+        self.pasteObject1_7.setCheckable(True)
+        self.pasteObject1_7.setFlat(False)
+        self.pasteObject1_7.setObjectName("pasteObject1_7")
+        self.verticalLayout_2.addWidget(self.pasteObject1_7)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)

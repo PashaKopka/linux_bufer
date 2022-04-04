@@ -57,7 +57,7 @@ class MainWindow(QtWidgets.QWidget):
 
 		# activate clipboard handler
 		self._clipboard = QtWidgets.QApplication.clipboard()
-		self._clipboard.dataChanged.connect(self.clipboard_changed)
+		self._clipboard.dataChanged.connect(self._add_clipboard_union)
 
 	def show_window(self):
 		position = QCursor.pos()
@@ -65,12 +65,24 @@ class MainWindow(QtWidgets.QWidget):
 		self.show()
 		self.activateWindow()
 
-	def _add_clipboard_union(self, clipboard_data):
+	def _add_clipboard_union(self):
 		# adding buffer union to interface
 		# function calling by shortcut
-		layout = self.ui.scrollAreaWidgetContents.layout()
-		union = ClipboardUnion(clipboard_data, self.ui.scrollAreaWidgetContents, self)
-		layout.insertWidget(0, union)
+		text = self._clipboard.text()
+		image = self._clipboard.image()
+		if text in self._data or image in self._data:
+			# if data already in clipboard skip it
+			pass
+		else:
+			layout = self.ui.scrollAreaWidgetContents.layout()
+			union = ClipboardUnion(self._clipboard, self.ui.scrollAreaWidgetContents, self)
+			layout.insertWidget(0, union)
+
+			# add data to clipboard
+			if text:
+				self._data.append(text)
+			elif not self._clipboard.pixmap().isNull():
+				self._data.append(image)
 
 	def _activate_shortcuts(self):
 		# create users shortcuts
@@ -89,14 +101,6 @@ class MainWindow(QtWidgets.QWidget):
 			# when click out of window
 			self.hide()
 		return super().event(event)
-
-	def clipboard_changed(self):
-		# Now handling only text
-		# TODO handle images also
-		data = self._clipboard.text()
-		if data not in self._data:
-			self._data.append(data)
-			self._add_clipboard_union(clipboard_data=data)
 
 
 if __name__ == '__main__':
