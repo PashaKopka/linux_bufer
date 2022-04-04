@@ -108,24 +108,27 @@ class Ui_Form(object):
 "    height: 0;\n"
 "}")
         self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -70, 280, 408))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 290, 338))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.verticalLayout_2.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pasteObject1 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1.setAccessibleDescription("")
-        self.pasteObject1.setStyleSheet("QPushButton{\n"
+        self.pasteObject1_16 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.pasteObject1_16.setMinimumSize(QtCore.QSize(0, 100))
+        self.pasteObject1_16.setMaximumSize(QtCore.QSize(265, 100))
+        self.pasteObject1_16.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.pasteObject1_16.setAccessibleDescription("")
+        self.pasteObject1_16.setStyleSheet("QPushButton{\n"
 "    border: 2px solid #313131;\n"
 "    color: #fff;\n"
 "    border-radius: 10px;\n"
 "    background-color: #414141;\n"
-"    text-align:left;\n"
+"    text-align:left top;\n"
 "    padding: 5px;\n"
-"    vertical-align: text-top;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -136,149 +139,34 @@ class Ui_Form(object):
 "    background-color: #313131;\n"
 "    border: 2px solid #08ffc8;\n"
 "}")
-        self.pasteObject1.setCheckable(True)
-        self.pasteObject1.setObjectName("pasteObject1")
-        self.verticalLayout_2.addWidget(self.pasteObject1)
-        self.pasteObject1_6 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1_6.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1_6.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_6.setAccessibleDescription("")
-        self.pasteObject1_6.setStyleSheet("QPushButton{\n"
-"    border: 2px solid #313131;\n"
-"    color: #fff;\n"
-"    border-radius: 10px;\n"
-"    background-color: #414141;\n"
-"    text-align:left;\n"
-"    padding: 5px;\n"
-"    vertical-align: text-top;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    border: 2px solid #08ffc8;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color: #313131;\n"
-"    border: 2px solid #08ffc8;\n"
-"}")
-        self.pasteObject1_6.setCheckable(True)
-        self.pasteObject1_6.setObjectName("pasteObject1_6")
-        self.verticalLayout_2.addWidget(self.pasteObject1_6)
-        self.pasteObject1_4 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1_4.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1_4.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_4.setAccessibleDescription("")
-        self.pasteObject1_4.setStyleSheet("QPushButton{\n"
-"    border: 2px solid #313131;\n"
-"    color: #fff;\n"
-"    border-radius: 10px;\n"
-"    background-color: #414141;\n"
-"    text-align:left;\n"
-"    padding: 5px;\n"
-"    vertical-align: text-top;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    border: 2px solid #08ffc8;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color: #313131;\n"
-"    border: 2px solid #08ffc8;\n"
-"}")
-        self.pasteObject1_4.setCheckable(True)
-        self.pasteObject1_4.setObjectName("pasteObject1_4")
-        self.verticalLayout_2.addWidget(self.pasteObject1_4)
-        self.pasteObject1_3 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1_3.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1_3.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_3.setAccessibleDescription("")
-        self.pasteObject1_3.setStyleSheet("QPushButton{\n"
-"    border: 2px solid #313131;\n"
-"    color: #fff;\n"
-"    border-radius: 10px;\n"
-"    background-color: #414141;\n"
-"    text-align:left;\n"
-"    padding: 5px;\n"
-"    vertical-align: text-top;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    border: 2px solid #08ffc8;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color: #313131;\n"
-"    border: 2px solid #08ffc8;\n"
-"}")
-        self.pasteObject1_3.setCheckable(True)
-        self.pasteObject1_3.setObjectName("pasteObject1_3")
-        self.verticalLayout_2.addWidget(self.pasteObject1_3)
-        self.pasteObject1_5 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1_5.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1_5.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_5.setAccessibleDescription("")
-        self.pasteObject1_5.setStyleSheet("QPushButton{\n"
-"    border: 2px solid #313131;\n"
-"    color: #fff;\n"
-"    border-radius: 10px;\n"
-"    background-color: #414141;\n"
-"    text-align:left;\n"
-"    padding: 5px;\n"
-"    vertical-align: text-top;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    border: 2px solid #08ffc8;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color: #313131;\n"
-"    border: 2px solid #08ffc8;\n"
-"}")
-        self.pasteObject1_5.setCheckable(True)
-        self.pasteObject1_5.setObjectName("pasteObject1_5")
-        self.verticalLayout_2.addWidget(self.pasteObject1_5)
-        self.pasteObject1_7 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.pasteObject1_7.setMinimumSize(QtCore.QSize(0, 60))
-        self.pasteObject1_7.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_7.setAccessibleDescription("")
-        self.pasteObject1_7.setStyleSheet("QPushButton{\n"
-"    border: 2px solid #313131;\n"
-"    color: #fff;\n"
-"    border-radius: 10px;\n"
-"    background-color: #414141;\n"
-"    text-align:left;\n"
-"    padding: 5px;\n"
-"    vertical-align: text-top;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    border: 2px solid #08ffc8;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color: #313131;\n"
-"    border: 2px solid #08ffc8;\n"
-"}")
-        self.pasteObject1_7.setCheckable(True)
-        self.pasteObject1_7.setObjectName("pasteObject1_7")
-        self.verticalLayout_2.addWidget(self.pasteObject1_7)
+        self.pasteObject1_16.setCheckable(True)
+        self.pasteObject1_16.setObjectName("pasteObject1_16")
+        self.verticalLayout_2.addWidget(self.pasteObject1_16)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_3.addWidget(self.scrollArea)
         self.verticalLayout.addWidget(self.frame)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.scrollArea, self.pushButton_2)
+        Form.setTabOrder(self.pushButton_2, self.pushButton)
+        Form.setTabOrder(self.pushButton, self.pasteObject1_16)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.pushButton_2.setText(_translate("Form", "PushButton"))
         self.pushButton.setText(_translate("Form", "PushButton"))
-        self.pasteObject1.setText(_translate("Form", "Test text"))
-        self.pasteObject1_6.setText(_translate("Form", "Test text"))
-        self.pasteObject1_4.setText(_translate("Form", "Test text"))
-        self.pasteObject1_3.setText(_translate("Form", "Test text"))
-        self.pasteObject1_5.setText(_translate("Form", "Test text"))
-        self.pasteObject1_7.setText(_translate("Form", "Test text"))
+        self.pasteObject1_16.setText(_translate("Form", "123\n"
+"\n"
+"\\n\n"
+"\n"
+"\n"
+"\n"
+"naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
+"aaa\n"
+"\n"
+"\n"
+"aaaaaaaaaaaaaaaaaaaaaaaa"))

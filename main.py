@@ -64,12 +64,12 @@ class MainWindow(QtWidgets.QWidget):
 		self.show()
 		self.activateWindow()
 
-	def add_clipboard_union(self, clipboard_data):
+	def _add_clipboard_union(self, clipboard_data):
 		# adding buffer union to interface
 		# function calling by shortcut
 		layout = self.ui.scrollAreaWidgetContents.layout()
 		union = ClipboardUnion(clipboard_data, self.ui.scrollAreaWidgetContents)
-		layout.addWidget(union)
+		layout.insertWidget(0, union)
 
 	def _activate_shortcuts(self):
 		# create users shortcuts
@@ -92,7 +92,7 @@ class MainWindow(QtWidgets.QWidget):
 		# Now handling only text
 		# TODO handle images also
 		data = self._clipboard.text()
-		self.add_clipboard_union(clipboard_data=data)
+		self._add_clipboard_union(clipboard_data=data)
 
 
 if __name__ == '__main__':

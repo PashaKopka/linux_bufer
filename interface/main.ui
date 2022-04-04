@@ -183,22 +183,46 @@ QScrollBar::add-line:vertical{
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignJustify|Qt::AlignTop</set>
+        </property>
         <widget class="QWidget" name="scrollAreaWidgetContents">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-70</y>
-           <width>280</width>
-           <height>408</height>
+           <y>0</y>
+           <width>290</width>
+           <height>338</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinimumSize</enum>
+          </property>
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
-           <widget class="QPushButton" name="pasteObject1">
+           <widget class="QPushButton" name="pasteObject1_16">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>60</height>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>265</width>
+              <height>100</height>
              </size>
             </property>
             <property name="cursor">
@@ -213,9 +237,8 @@ QScrollBar::add-line:vertical{
 	color: #fff;
 	border-radius: 10px;
 	background-color: #414141;
-	text-align:left;
+	text-align:left top;
 	padding: 5px;
-	vertical-align: text-top;
 }
 
 QPushButton:hover{
@@ -228,7 +251,17 @@ QPushButton:pressed{
 }</string>
             </property>
             <property name="text">
-             <string>Test text</string>
+             <string>123
+
+\n
+
+
+
+naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaa
+
+
+aaaaaaaaaaaaaaaaaaaaaaaa</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -236,214 +269,17 @@ QPushButton:pressed{
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pasteObject1_6">
-            <property name="minimumSize">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>0</width>
-              <height>60</height>
+              <width>20</width>
+              <height>40</height>
              </size>
             </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="accessibleDescription">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left;
-	padding: 5px;
-	vertical-align: text-top;
-}
-
-QPushButton:hover{
-	border: 2px solid #08ffc8;
-}
-
-QPushButton:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-            </property>
-            <property name="text">
-             <string>Test text</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pasteObject1_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="accessibleDescription">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left;
-	padding: 5px;
-	vertical-align: text-top;
-}
-
-QPushButton:hover{
-	border: 2px solid #08ffc8;
-}
-
-QPushButton:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-            </property>
-            <property name="text">
-             <string>Test text</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pasteObject1_3">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="accessibleDescription">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left;
-	padding: 5px;
-	vertical-align: text-top;
-}
-
-QPushButton:hover{
-	border: 2px solid #08ffc8;
-}
-
-QPushButton:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-            </property>
-            <property name="text">
-             <string>Test text</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pasteObject1_5">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="accessibleDescription">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left;
-	padding: 5px;
-	vertical-align: text-top;
-}
-
-QPushButton:hover{
-	border: 2px solid #08ffc8;
-}
-
-QPushButton:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-            </property>
-            <property name="text">
-             <string>Test text</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pasteObject1_7">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="accessibleDescription">
-             <string/>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left;
-	padding: 5px;
-	vertical-align: text-top;
-}
-
-QPushButton:hover{
-	border: 2px solid #08ffc8;
-}
-
-QPushButton:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-            </property>
-            <property name="text">
-             <string>Test text</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -454,6 +290,12 @@ QPushButton:pressed{
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pasteObject1_16</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
