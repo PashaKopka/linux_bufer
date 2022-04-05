@@ -102,7 +102,7 @@ QTabWidget::tab-bar {
 
 QTabBar::scroller {
 	width: 0;
-	heigth: 0;
+	height: 0;
 }
 
 QTabWidget::pane {

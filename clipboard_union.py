@@ -14,8 +14,8 @@ class ClipboardUnion(QtWidgets.QPushButton):
 	):
 		super().__init__(parent)
 		self.clicked.connect(self._paste)
-		self._clipboard = clipboard
-		self._text = self._clipboard.text()
+		self._clipboard: QtGui.QClipboard = clipboard
+		self._text: str = self._clipboard.text()
 
 		# need to paste image
 		self._image = self._clipboard.image() if not self._clipboard.pixmap().isNull() else None
@@ -25,10 +25,10 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		self._normalize_widget()
 		self._parent_window = parent_window  # Need parent window to hiding it
 
-	def _paste(self):
+	def _paste(self) -> None:
 		"""
 		paste clipboard data
-		hide main window and then use shortcut <Ctrl>+C
+		hide main window and then use shortcut <Ctrl>+V
 		may be problems if is another shortcut in system for this function
 		"""
 		self._parent_window.hide()
@@ -36,12 +36,14 @@ class ClipboardUnion(QtWidgets.QPushButton):
 
 		keyboard_controller = keyboard.Controller()
 		time.sleep(.01)  # Time to window hiding
-		# TODO think about other variants
+		# TODO think about other variants ^
+
+		# emulate <Ctrl>+V pressing
 		with keyboard_controller.pressed(keyboard.Key.ctrl):
 			keyboard_controller.press('v')
 			keyboard_controller.release('v')
 
-	def _update_clipboard(self):
+	def _update_clipboard(self) -> None:
 		"""
 		updates last clipboard element
 		it sets data in clipboard (like you use <Ctrl>+C)
@@ -55,21 +57,20 @@ class ClipboardUnion(QtWidgets.QPushButton):
 	def _normalize_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
 		if self._text:
-			# TODO if text hasn`t \n -> text on many lines; else -> one line
 			# TODO add icon of active application
 			if not self._text.count('\n') or self._text.find('\n') == (len(self._text) - 1):
-				label = QtWidgets.QLabel(self._text, self)
-				label.setWordWrap(True)
-				self._set_standard_label_styles(label)
-
-				layout = QtWidgets.QHBoxLayout(self)
-				layout.addWidget(label, 0, QtCore.Qt.AlignCenter)
+				# if string is oneline we need to wrap it
+				# so we need to create label to wrap text
+				self._add_label_to_union()
 			else:
-				self.setText(self._text)
+				# if we have many lines in string we just put text in prepared button
+				self.setText(self._text.replace('\t', '    '))
 
+			# set standard styles for button (union)
 			self._set_standard_styles(text_align='left top')
 
 		elif self._image:
+			# if user copy image
 			# TODO add function of saving image
 			self._set_standard_styles(text_align='center')
 
@@ -78,7 +79,21 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			self.setIcon(icon)
 			self.setIconSize(QtCore.QSize(200, 90))
 
-	def _set_standard_label_styles(self, label: QtWidgets.QLabel):
+	def _add_label_to_union(self) -> None:
+		"""
+		adding union in self layout
+		"""
+		label: QtWidgets.QLabel = self._create_standard_label()
+		# create layout for button and put label there
+		layout = QtWidgets.QHBoxLayout(self)
+		layout.addWidget(label, 0, QtCore.Qt.AlignCenter)
+
+	def _create_standard_label(self) -> QtWidgets.QLabel:
+		"""
+		function create standard label for union and return it
+		"""
+		label = QtWidgets.QLabel(self._text, self)
+		label.setWordWrap(True)
 		label.setStyleSheet(
 			'color: #fff;'
 			'background-color: #414141;'
@@ -89,6 +104,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		label.setFixedSize(size)
 		label.setAlignment(QtCore.Qt.AlignLeft)
 		label.setAlignment(QtCore.Qt.AlignTop)
+		return label
 
 	def _set_standard_styles(self, text_align: str) -> None:
 		"""

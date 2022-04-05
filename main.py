@@ -83,7 +83,7 @@ class MainWindow(QtWidgets.QWidget):
 	def _add_clipboard_union(self):
 		"""
 		adding clipboard union to interface and data to self._data
-		function calling if clipboard update
+		function calling if clipboard updates
 		"""
 		text = self._clipboard.text()
 		image = self._clipboard.image()
@@ -95,12 +95,13 @@ class MainWindow(QtWidgets.QWidget):
 			# add union to all_unions_scrollarea_content
 			self._add_clipboard_union_to_layout(self.ui.all_unions_scrollarea_content)
 
-			# TODO may be do something better
 			# add data to clipboard
 			if text:
 				if validators.url(text):
+					# if text looks like link
 					self._add_clipboard_union_to_layout(self.ui.links_scrollarea_content)
 				else:
+					# just simple text
 					self._add_clipboard_union_to_layout(self.ui.text_scrollarea_content)
 
 				self._data.append(text)
@@ -108,9 +109,13 @@ class MainWindow(QtWidgets.QWidget):
 				self._data.append(image)
 				self._add_clipboard_union_to_layout(self.ui.images_scrollarea_content)
 
-	def _add_clipboard_union_to_layout(self, _layout):
-		layout = _layout.layout()
-		union = ClipboardUnion(self._clipboard, _layout, self)
+	def _add_clipboard_union_to_layout(self, parent_widget: QtWidgets.QWidget) -> None:
+		"""
+		create clipboard union and add it to _layout
+		:param parent_widget: widget in which union will be added
+		"""
+		layout = parent_widget.layout()
+		union = ClipboardUnion(self._clipboard, parent_widget, self)
 		layout.insertWidget(0, union)
 
 	def _activate_shortcuts(self):

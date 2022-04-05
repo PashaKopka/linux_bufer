@@ -60,7 +60,7 @@ class Ui_Form(object):
 "\n"
 "QTabBar::scroller {\n"
 "    width: 0;\n"
-"    heigth: 0;\n"
+"    height: 0;\n"
 "}\n"
 "\n"
 "QTabWidget::pane {\n"
