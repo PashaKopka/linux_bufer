@@ -1,6 +1,5 @@
 import time
 
-import pyperclip
 from PyQt5 import QtWidgets, QtCore, QtGui
 from pynput import keyboard
 
@@ -14,7 +13,6 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			parent_window: QtWidgets.QWidget,
 	):
 		super().__init__(parent)
-		# TODO if text hasn`t \n -> text on many lines; else -> one line
 		self.clicked.connect(self._paste)
 		self._clipboard = clipboard
 		self._text = self._clipboard.text()
@@ -28,6 +26,11 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		self._parent_window = parent_window  # Need parent window to hiding it
 
 	def _paste(self):
+		"""
+		paste clipboard data
+		hide main window and then use shortcut <Ctrl>+C
+		may be problems if is another shortcut in system for this function
+		"""
 		self._parent_window.hide()
 		self._update_clipboard()
 
@@ -38,16 +41,23 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			keyboard_controller.release('v')
 
 	def _update_clipboard(self):
+		"""
+		updates last clipboard element
+		it sets data in clipboard (like you use <Ctrl>+C)
+		and then you can paste this data
+		"""
 		if self._text:
 			self._clipboard.setText(self._text)
 		elif self._pixel_map:
 			self._clipboard.setImage(self._image)
 
-	def _normalize_widget(self):
+	def _normalize_widget(self) -> None:
+		"""normalize union: sets standard styles, sets showing text or image"""
 		if self._text:
+			# TODO if text hasn`t \n -> text on many lines; else -> one line
 			self.setText(self._text)
 			self._set_standard_styles(text_align='left top')
-		# TODO add icon of active application
+			# TODO add icon of active application
 		elif self._image:
 			self._set_standard_styles(text_align='center')
 
@@ -56,7 +66,12 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			self.setIcon(icon)
 			self.setIconSize(QtCore.QSize(200, 90))
 
-	def _set_standard_styles(self, text_align: str):
+	def _set_standard_styles(self, text_align: str) -> None:
+		"""
+		standard looking of button of clipboard
+		:param text_align: text align of the button
+			for image -> center, for text -> left top
+		"""
 		self.setMinimumSize(QtCore.QSize(0, 100))
 		self.setMaximumSize(QtCore.QSize(265, 100))
 		self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
