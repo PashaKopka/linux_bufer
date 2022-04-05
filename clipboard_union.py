@@ -36,6 +36,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 
 		keyboard_controller = keyboard.Controller()
 		time.sleep(.01)  # Time to window hiding
+		# TODO think about other variants
 		with keyboard_controller.pressed(keyboard.Key.ctrl):
 			keyboard_controller.press('v')
 			keyboard_controller.release('v')
@@ -55,16 +56,39 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		"""normalize union: sets standard styles, sets showing text or image"""
 		if self._text:
 			# TODO if text hasn`t \n -> text on many lines; else -> one line
-			self.setText(self._text)
-			self._set_standard_styles(text_align='left top')
 			# TODO add icon of active application
+			if not self._text.count('\n') or self._text.find('\n') == (len(self._text) - 1):
+				label = QtWidgets.QLabel(self._text, self)
+				label.setWordWrap(True)
+				self._set_standard_label_styles(label)
+
+				layout = QtWidgets.QHBoxLayout(self)
+				layout.addWidget(label, 0, QtCore.Qt.AlignCenter)
+			else:
+				self.setText(self._text)
+
+			self._set_standard_styles(text_align='left top')
+
 		elif self._image:
+			# TODO add function of saving image
 			self._set_standard_styles(text_align='center')
 
 			# set icon
 			icon = QtGui.QIcon(self._pixel_map)
 			self.setIcon(icon)
 			self.setIconSize(QtCore.QSize(200, 90))
+
+	def _set_standard_label_styles(self, label: QtWidgets.QLabel):
+		label.setStyleSheet(
+			'color: #fff;'
+			'background-color: #414141;'
+			# 'text-align:left top;'
+			'padding: 0;'
+		)
+		size = QtCore.QSize(250, 85)
+		label.setFixedSize(size)
+		label.setAlignment(QtCore.Qt.AlignLeft)
+		label.setAlignment(QtCore.Qt.AlignTop)
 
 	def _set_standard_styles(self, text_align: str) -> None:
 		"""

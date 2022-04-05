@@ -1,5 +1,6 @@
 import sys
 
+import validators as validators
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
@@ -91,16 +92,26 @@ class MainWindow(QtWidgets.QWidget):
 			# if data already in clipboard skip it
 			pass
 		else:
-			# create union
-			layout = self.ui.scrollAreaWidgetContents.layout()
-			union = ClipboardUnion(self._clipboard, self.ui.scrollAreaWidgetContents, self)
-			layout.insertWidget(0, union)
+			# add union to all_unions_scrollarea_content
+			self._add_clipboard_union_to_layout(self.ui.all_unions_scrollarea_content)
 
+			# TODO may be do something better
 			# add data to clipboard
 			if text:
+				if validators.url(text):
+					self._add_clipboard_union_to_layout(self.ui.links_scrollarea_content)
+				else:
+					self._add_clipboard_union_to_layout(self.ui.text_scrollarea_content)
+
 				self._data.append(text)
 			elif not self._clipboard.pixmap().isNull():
 				self._data.append(image)
+				self._add_clipboard_union_to_layout(self.ui.images_scrollarea_content)
+
+	def _add_clipboard_union_to_layout(self, _layout):
+		layout = _layout.layout()
+		union = ClipboardUnion(self._clipboard, _layout, self)
+		layout.insertWidget(0, union)
 
 	def _activate_shortcuts(self):
 		"""
