@@ -237,16 +237,8 @@ QPushButton:pressed{
                 </property>
                 <property name="text">
                  <string>123
-
-\n
-
-
-
-naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaa
-
-
-aaaaaaaaaaaaaaaaaaaaaaaa</string>
+t1\t
+    1</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>

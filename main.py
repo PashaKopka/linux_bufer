@@ -87,8 +87,10 @@ class MainWindow(QtWidgets.QWidget):
 		"""
 		text = self._clipboard.text()
 		image = self._clipboard.image()
+		file_urls = [x.path() for x in self._clipboard.mimeData().urls()]
 
-		if text in self._data or image in self._data:
+		# TODO crossing of sets
+		if text in self._data or image in self._data or file_urls in self._data:
 			# if data already in clipboard skip it
 			pass
 		else:
@@ -96,7 +98,17 @@ class MainWindow(QtWidgets.QWidget):
 			self._add_clipboard_union_to_layout(self.ui.all_unions_scrollarea_content)
 
 			# add data to clipboard
-			if text:
+			if self._clipboard.mimeData().urls():
+				# if we have url in urls list -> user copied file
+				self._data.append(file_urls)
+				self._add_clipboard_union_to_layout(self.ui.files_scrollarea_content)
+
+			elif not self._clipboard.pixmap().isNull():
+				# if copied data is image
+				self._data.append(image)
+				self._add_clipboard_union_to_layout(self.ui.images_scrollarea_content)
+
+			elif text:
 				if validators.url(text):
 					# if text looks like link
 					self._add_clipboard_union_to_layout(self.ui.links_scrollarea_content)
@@ -105,9 +117,9 @@ class MainWindow(QtWidgets.QWidget):
 					self._add_clipboard_union_to_layout(self.ui.text_scrollarea_content)
 
 				self._data.append(text)
-			elif not self._clipboard.pixmap().isNull():
-				self._data.append(image)
-				self._add_clipboard_union_to_layout(self.ui.images_scrollarea_content)
+
+			else:
+				raise TypeError('Now supports only text, image and file')
 
 	def _add_clipboard_union_to_layout(self, parent_widget: QtWidgets.QWidget) -> None:
 		"""

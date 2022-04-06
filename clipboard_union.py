@@ -21,6 +21,8 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		self._image = self._clipboard.image() if not self._clipboard.pixmap().isNull() else None
 		# need to show image in ui
 		self._pixel_map = self._clipboard.pixmap() if not self._clipboard.pixmap().isNull() else None
+		# list of urls to selected files
+		self._files_urls = [x.path() for x in self._clipboard.mimeData().urls()]
 
 		self._normalize_widget()
 		self._parent_window = parent_window  # Need parent window to hiding it
@@ -49,14 +51,27 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		it sets data in clipboard (like you use <Ctrl>+C)
 		and then you can paste this data
 		"""
-		if self._text:
+		if self._files_urls:
+			data = QtCore.QMimeData()
+			urls = [QtCore.QUrl.fromLocalFile(x) for x in self._files_urls]
+			data.setUrls(urls)
+			self._clipboard.setMimeData(data)
+		elif self._text:
 			self._clipboard.setText(self._text)
 		elif self._pixel_map:
 			self._clipboard.setImage(self._image)
+		else:
+			raise TypeError('Now supports only text, image and file')
 
 	def _normalize_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
-		if self._text:
+		if self._files_urls:
+			# if user copy file
+			file_names = [x.rsplit('/', 1)[-1] for x in self._files_urls]
+			self.setText('\n'.join(file_names))
+			self._set_standard_styles(text_align='left top')
+
+		elif self._text:
 			# TODO add icon of active application
 			if not self._text.count('\n') or self._text.find('\n') == (len(self._text) - 1):
 				# if string is oneline we need to wrap it
@@ -79,6 +94,9 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			self.setIcon(icon)
 			self.setIconSize(QtCore.QSize(200, 90))
 
+		else:
+			raise TypeError('Now supports only text, image and file')
+
 	def _add_label_to_union(self) -> None:
 		"""
 		adding union in self layout
@@ -92,6 +110,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		"""
 		function create standard label for union and return it
 		"""
+		# TODO if string contains of big words, than split it by \n
 		label = QtWidgets.QLabel(self._text, self)
 		label.setWordWrap(True)
 		label.setStyleSheet(
