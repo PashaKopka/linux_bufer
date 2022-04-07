@@ -35,6 +35,34 @@ class Ui_Form(object):
         self.verticalLayout_3.setContentsMargins(5, 10, 5, 10)
         self.verticalLayout_3.setSpacing(10)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.searchbar = QtWidgets.QLineEdit(self.frame)
+        self.searchbar.setStyleSheet("QLineEdit {\n"
+"    background-color: #a39e9e;\n"
+"    border: 1px solid #313131;\n"
+"    border-radius: 5px;\n"
+"    width: 220px;\n"
+"    padding: 2 2 2 20;\n"
+"    color: #fff;\n"
+"    background-image: url(\'/home/pasha/coding/python/linux_bufer/sources/images/search.svg\'); /* actual size, e.g. 16x16 */\n"
+"    background-repeat: no-repeat;\n"
+"    background-position: center left;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #08ffc8;\n"
+"}")
+        self.searchbar.setFrame(False)
+        self.searchbar.setCursorMoveStyle(QtCore.Qt.LogicalMoveStyle)
+        self.searchbar.setClearButtonEnabled(False)
+        self.searchbar.setObjectName("searchbar")
+        self.horizontalLayout.addWidget(self.searchbar)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.tabWidget = QtWidgets.QTabWidget(self.frame)
         self.tabWidget.setStyleSheet("QTabBar::tab {\n"
 "    border: 2px solid #313131;\n"
@@ -107,7 +135,7 @@ class Ui_Form(object):
         self.all_unions_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.all_unions_scrollarea.setObjectName("all_unions_scrollarea")
         self.all_unions_scrollarea_content = QtWidgets.QWidget()
-        self.all_unions_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 345))
+        self.all_unions_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
         self.all_unions_scrollarea_content.setObjectName("all_unions_scrollarea_content")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.all_unions_scrollarea_content)
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
@@ -138,8 +166,8 @@ class Ui_Form(object):
         self.pasteObject1_16.setCheckable(True)
         self.pasteObject1_16.setObjectName("pasteObject1_16")
         self.verticalLayout_2.addWidget(self.pasteObject1_16)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem2)
         self.all_unions_scrollarea.setWidget(self.all_unions_scrollarea_content)
         self.verticalLayout.addWidget(self.all_unions_scrollarea)
         self.tabWidget.addTab(self.all_unions, "")
@@ -182,14 +210,14 @@ class Ui_Form(object):
         self.text_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.text_scrollarea.setObjectName("text_scrollarea")
         self.text_scrollarea_content = QtWidgets.QWidget()
-        self.text_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 345))
+        self.text_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
         self.text_scrollarea_content.setObjectName("text_scrollarea_content")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.text_scrollarea_content)
         self.verticalLayout_5.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_5.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_5.addItem(spacerItem1)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem3)
         self.text_scrollarea.setWidget(self.text_scrollarea_content)
         self.verticalLayout_9.addWidget(self.text_scrollarea)
         self.tabWidget.addTab(self.text, "")
@@ -232,14 +260,14 @@ class Ui_Form(object):
         self.images_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.images_scrollarea.setObjectName("images_scrollarea")
         self.images_scrollarea_content = QtWidgets.QWidget()
-        self.images_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 345))
+        self.images_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
         self.images_scrollarea_content.setObjectName("images_scrollarea_content")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.images_scrollarea_content)
         self.verticalLayout_6.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_6.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_6.addItem(spacerItem2)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_6.addItem(spacerItem4)
         self.images_scrollarea.setWidget(self.images_scrollarea_content)
         self.verticalLayout_10.addWidget(self.images_scrollarea)
         self.tabWidget.addTab(self.images, "")
@@ -282,14 +310,14 @@ class Ui_Form(object):
         self.links_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.links_scrollarea.setObjectName("links_scrollarea")
         self.links_scrollarea_content = QtWidgets.QWidget()
-        self.links_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 345))
+        self.links_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
         self.links_scrollarea_content.setObjectName("links_scrollarea_content")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.links_scrollarea_content)
         self.verticalLayout_11.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_11.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_11.addItem(spacerItem3)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_11.addItem(spacerItem5)
         self.links_scrollarea.setWidget(self.links_scrollarea_content)
         self.verticalLayout_12.addWidget(self.links_scrollarea)
         self.tabWidget.addTab(self.links, "")
@@ -332,14 +360,14 @@ class Ui_Form(object):
         self.files_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.files_scrollarea.setObjectName("files_scrollarea")
         self.files_scrollarea_content = QtWidgets.QWidget()
-        self.files_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 345))
+        self.files_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
         self.files_scrollarea_content.setObjectName("files_scrollarea_content")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.files_scrollarea_content)
         self.verticalLayout_13.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_13.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem4)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_13.addItem(spacerItem6)
         self.files_scrollarea.setWidget(self.files_scrollarea_content)
         self.verticalLayout_14.addWidget(self.files_scrollarea)
         self.tabWidget.addTab(self.files, "")
@@ -353,17 +381,10 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.searchbar.setPlaceholderText(_translate("Form", "Type to Search..."))
         self.pasteObject1_16.setText(_translate("Form", "123\n"
-"\n"
-"\\n\n"
-"\n"
-"\n"
-"\n"
-"naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
-"aaa\n"
-"\n"
-"\n"
-"aaaaaaaaaaaaaaaaaaaaaaaa"))
+"t1\\t\n"
+"    1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.all_unions), _translate("Form", "all"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.text), _translate("Form", "text"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.images), _translate("Form", "images"))

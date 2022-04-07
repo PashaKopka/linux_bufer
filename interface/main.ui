@@ -76,6 +76,69 @@ border-radius: 15px;</string>
        <number>10</number>
       </property>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="searchbar">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: #a39e9e;
+	border: 1px solid #313131;
+	border-radius: 5px;
+	width: 220px;
+	padding: 2 2 2 20;
+	color: #fff;
+	background-image: url('/home/pasha/coding/python/linux_bufer/sources/images/search.svg'); /* actual size, e.g. 16x16 */
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+
+QLineEdit:focus {
+	border: 1px solid #08ffc8;
+}</string>
+          </property>
+          <property name="frame">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Type to Search...</string>
+          </property>
+          <property name="cursorMoveStyle">
+           <enum>Qt::LogicalMoveStyle</enum>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
          <string notr="true">QTabBar::tab {
@@ -113,9 +176,21 @@ QTabWidget::pane {
         <property name="currentIndex">
          <number>0</number>
         </property>
+        <property name="usesScrollButtons">
+         <bool>true</bool>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
+        </property>
+        <property name="tabsClosable">
+         <bool>false</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
+        </property>
         <widget class="QWidget" name="all_unions">
          <attribute name="title">
-          <string>all</string>
+          <string>All</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="spacing">
@@ -177,7 +252,7 @@ QScrollBar::add-line:vertical{
                <x>0</x>
                <y>0</y>
                <width>290</width>
-               <height>345</height>
+               <height>308</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -266,7 +341,7 @@ t1\t
         </widget>
         <widget class="QWidget" name="text">
          <attribute name="title">
-          <string>text</string>
+          <string>Text</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <property name="spacing">
@@ -328,7 +403,7 @@ QScrollBar::add-line:vertical{
                <x>0</x>
                <y>0</y>
                <width>290</width>
-               <height>345</height>
+               <height>308</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -368,7 +443,7 @@ QScrollBar::add-line:vertical{
         </widget>
         <widget class="QWidget" name="images">
          <attribute name="title">
-          <string>images</string>
+          <string>Images</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <property name="spacing">
@@ -430,7 +505,7 @@ QScrollBar::add-line:vertical{
                <x>0</x>
                <y>0</y>
                <width>290</width>
-               <height>345</height>
+               <height>308</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -470,7 +545,7 @@ QScrollBar::add-line:vertical{
         </widget>
         <widget class="QWidget" name="links">
          <attribute name="title">
-          <string>links</string>
+          <string>Links</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <property name="spacing">
@@ -532,7 +607,7 @@ QScrollBar::add-line:vertical{
                <x>0</x>
                <y>0</y>
                <width>290</width>
-               <height>345</height>
+               <height>308</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -572,7 +647,7 @@ QScrollBar::add-line:vertical{
         </widget>
         <widget class="QWidget" name="files">
          <attribute name="title">
-          <string>files</string>
+          <string>Files</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_14">
           <property name="spacing">
@@ -634,7 +709,7 @@ QScrollBar::add-line:vertical{
                <x>0</x>
                <y>0</y>
                <width>290</width>
-               <height>345</height>
+               <height>308</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13">
