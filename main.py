@@ -84,6 +84,9 @@ class MainWindow(QtWidgets.QWidget):
 		self.show()
 		self.activateWindow()
 
+	def hide_window(self):
+		self.hide()
+
 	def _add_clipboard_union(self):
 		"""
 		adding clipboard union to interface and data to self._data
@@ -124,7 +127,7 @@ class MainWindow(QtWidgets.QWidget):
 				self._data.append(text)
 
 			else:
-				raise TypeError('Now supports only text, image and file')
+				raise TypeError('Now supports only text, image and files')
 
 			self._all_unions.append(union)
 
@@ -168,6 +171,8 @@ class MainWindow(QtWidgets.QWidget):
 		if event.type() == QtCore.QEvent.WindowDeactivate:
 			# when click out of window
 			self.hide()
+		elif event.type() == QtCore.QEvent.Hide:
+			self.event(QtCore.QEvent(QtCore.QEvent.WindowDeactivate))
 		return super().event(event)
 
 	@staticmethod

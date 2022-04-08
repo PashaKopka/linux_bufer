@@ -33,12 +33,11 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		hide main window and then use shortcut <Ctrl>+V
 		may be problems if is another shortcut in system for this function
 		"""
-		self._parent_window.hide()
+		self._parent_window.hide_window()
 		self._update_clipboard()
 
 		keyboard_controller = keyboard.Controller()
 		time.sleep(.01)  # Time to window hiding
-		# TODO think about other variants ^
 
 		# emulate <Ctrl>+V pressing
 		with keyboard_controller.pressed(keyboard.Key.ctrl):
@@ -61,7 +60,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		elif self._pixel_map:
 			self._clipboard.setImage(self._image)
 		else:
-			raise TypeError('Now supports only text, image and file')
+			raise TypeError('Now supports only text, image and files')
 
 	def _normalize_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
@@ -95,12 +94,13 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			self.setIconSize(QtCore.QSize(200, 90))
 
 		else:
-			raise TypeError('Now supports only text, image and file')
+			raise TypeError('Now supports only text, image and files')
 
 	def _add_label_to_union(self) -> None:
 		"""
 		adding union in self layout
 		"""
+		# TODO label dont change background fixit!
 		label: QtWidgets.QLabel = self._create_standard_label()
 		# create layout for button and put label there
 		layout = QtWidgets.QHBoxLayout(self)

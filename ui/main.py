@@ -95,6 +95,10 @@ class Ui_Form(object):
 "    border: 0;\n"
 "    margin-top: 10px;\n"
 "}")
+        self.tabWidget.setUsesScrollButtons(True)
+        self.tabWidget.setDocumentMode(False)
+        self.tabWidget.setTabsClosable(False)
+        self.tabWidget.setMovable(True)
         self.tabWidget.setObjectName("tabWidget")
         self.all_unions = QtWidgets.QWidget()
         self.all_unions.setObjectName("all_unions")
@@ -385,8 +389,8 @@ class Ui_Form(object):
         self.pasteObject1_16.setText(_translate("Form", "123\n"
 "t1\\t\n"
 "    1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.all_unions), _translate("Form", "all"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.text), _translate("Form", "text"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.images), _translate("Form", "images"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.links), _translate("Form", "links"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.files), _translate("Form", "files"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.all_unions), _translate("Form", "All"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.text), _translate("Form", "Text"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.images), _translate("Form", "Images"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.links), _translate("Form", "Links"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.files), _translate("Form", "Files"))
