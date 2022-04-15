@@ -26,9 +26,14 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border: 1px solid #FFF;
-border-radius: 30px;
-background-color: #525252;</string>
+   <string notr="true">.main_window {
+	border: 1px solid #FFF;
+	border-radius: 30px;
+	background-color: #525252;
+}</string>
+  </property>
+  <property name="class" stdset="0">
+   <string>main_window</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <property name="spacing">
@@ -49,15 +54,21 @@ background-color: #525252;</string>
    <item>
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
-      <string notr="true">background-color: #525252;
-border: 2 px solid #000;
-border-radius: 15px;</string>
+      <string notr="true">.frame {
+	background-color: #525252;
+	border: 2 px solid #000;
+	border-radius: 15px;
+}
+</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
+     </property>
+     <property name="class" stdset="0">
+      <string>frame</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
@@ -174,7 +185,47 @@ QTabBar::scroller {
 QTabWidget::pane {
 	border: 0;
 	margin-top: 10px;
-}</string>
+}
+
+.scrollarea_content {
+	background-color: #525252;
+}
+
+/* SCROLLAREA */
+
+QScrollArea {
+	background-color: #525252;
+	border: none;
+}
+
+QScrollBar:vertical{
+	border: none;
+	background: transparent;
+	width: 6px;
+	margin: 7px 0 7px 0; 
+	border-radius: 3px;
+}
+
+QScrollBar::handle:vertical{
+	background-color: transparent;
+	min-height: 30px;
+	border-radius: 3px;
+}
+
+QScrollBar::handle:vertical:pressed{
+	background-color: #EAEAEA;
+}
+
+QScrollBar::sub-line:vertical{
+	width: 0;
+	height: 0;
+}
+
+QScrollBar::add-line:vertical{
+	width: 0;
+	height: 0;
+}
+</string>
         </property>
         <property name="tabShape">
          <enum>QTabWidget::Rounded</enum>
@@ -201,6 +252,9 @@ QTabWidget::pane {
          <bool>false</bool>
         </property>
         <widget class="QWidget" name="all_unions">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <attribute name="title">
           <string>All</string>
          </attribute>
@@ -223,34 +277,13 @@ QTabWidget::pane {
           <item>
            <widget class="QScrollArea" name="all_unions_scrollarea">
             <property name="styleSheet">
-             <string notr="true">/* Vertical */
-QScrollBar:vertical{
-	border: none;
-	background-color: #313131;
-	width: 10px;
-	margin: 11px 0 11px 0; 
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical{
-	background-color: #a39e9e;
-	min-height: 30px;
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: #EAEAEA;
-}
-
-QScrollBar::sub-line:vertical{
-	width: 0;
-	height: 0;
-}
-
-QScrollBar::add-line:vertical{
-	width: 0;
-	height: 0;
-}</string>
+             <string notr="true"/>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
             <property name="widgetResizable">
              <bool>true</bool>
@@ -267,7 +300,16 @@ QScrollBar::add-line:vertical{
                <height>308</height>
               </rect>
              </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="class" stdset="0">
+              <string>scrollarea_content</string>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
+              <property name="spacing">
+               <number>6</number>
+              </property>
               <property name="sizeConstraint">
                <enum>QLayout::SetMinimumSize</enum>
               </property>
@@ -284,7 +326,7 @@ QScrollBar::add-line:vertical{
                <number>0</number>
               </property>
               <item>
-               <widget class="QPushButton" name="pasteObject1_16">
+               <widget class="QWidget" name="clipboard_union_4" native="true">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -293,43 +335,281 @@ QScrollBar::add-line:vertical{
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>265</width>
+                  <width>16777215</width>
                   <height>100</height>
                  </size>
                 </property>
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="accessibleDescription">
-                 <string/>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">QPushButton{
+                 <string notr="true">.clipboard_union{
+	border: 2px solid #313131;
+	color: #fff;
+	border-radius: 10px;
+	background-color: #414141;
+}
+
+.clipboard_union:hover{
+	border: 2px solid #08ffc8;
+}
+
+.clipboard_union:pressed{
+	background-color: #313131;
+	border: 2px solid #08ffc8;
+}</string>
+                </property>
+                <property name="class" stdset="0">
+                 <string>clipboard_union</string>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="text_3">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: #fff;
+text-align:left top;
+padding: 22px 20px 22px 10px;</string>
+                   </property>
+                   <property name="text">
+                    <string>TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel </string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="props_2" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>60</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>40</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">margin: 0px 10px 0 0;</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_16">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>7</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>10</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="datetime_2">
+                      <property name="font">
+                       <font>
+                        <pointsize>9</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: #fff;</string>
+                      </property>
+                      <property name="text">
+                       <string>01.01.21</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_3">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="pixmap">
+                       <pixmap>../../../../Downloads/Hnet.com-image.png</pixmap>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="clipboard_union" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>100</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>100</height>
+                 </size>
+                </property>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">.clipboard_union{
 	border: 2px solid #313131;
 	color: #fff;
 	border-radius: 10px;
 	background-color: #414141;
 	text-align:left top;
-	padding: 5px;
+	padding: 21px 70px 21px 20px;
 }
 
-QPushButton:hover{
+.clipboard_union:hover{
 	border: 2px solid #08ffc8;
 }
 
-QPushButton:pressed{
+.clipboard_union:pressed{
 	background-color: #313131;
 	border: 2px solid #08ffc8;
 }</string>
                 </property>
-                <property name="text">
-                 <string>123
-t1\t
-    1</string>
+                <property name="class" stdset="0">
+                 <string>clipboard_union</string>
                 </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="props" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>60</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>40</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">margin: 0px 5px;</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>7</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>10</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="datetime">
+                      <property name="font">
+                       <font>
+                        <pointsize>9</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: #fff;</string>
+                      </property>
+                      <property name="text">
+                       <string>01.01.21</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_2">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="pixmap">
+                       <pixmap>../../../../Downloads/Hnet.com-image.png</pixmap>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="text_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: #fff;
+text-align:left top;
+padding: 22px 20px 22px 5px;</string>
+                   </property>
+                   <property name="text">
+                    <string>TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel </string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
               <item>
@@ -374,34 +654,7 @@ t1\t
           <item>
            <widget class="QScrollArea" name="text_scrollarea">
             <property name="styleSheet">
-             <string notr="true">/* Vertical */
-QScrollBar:vertical{
-	border: none;
-	background-color: #313131;
-	width: 10px;
-	margin: 11px 0 11px 0; 
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical{
-	background-color: #a39e9e;
-	min-height: 30px;
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: #EAEAEA;
-}
-
-QScrollBar::sub-line:vertical{
-	width: 0;
-	height: 0;
-}
-
-QScrollBar::add-line:vertical{
-	width: 0;
-	height: 0;
-}</string>
+             <string notr="true"/>
             </property>
             <property name="widgetResizable">
              <bool>true</bool>
@@ -417,6 +670,9 @@ QScrollBar::add-line:vertical{
                <width>290</width>
                <height>308</height>
               </rect>
+             </property>
+             <property name="class" stdset="0">
+              <string>scrollarea_content</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <property name="sizeConstraint">
@@ -476,34 +732,7 @@ QScrollBar::add-line:vertical{
           <item>
            <widget class="QScrollArea" name="images_scrollarea">
             <property name="styleSheet">
-             <string notr="true">/* Vertical */
-QScrollBar:vertical{
-	border: none;
-	background-color: #313131;
-	width: 10px;
-	margin: 11px 0 11px 0; 
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical{
-	background-color: #a39e9e;
-	min-height: 30px;
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: #EAEAEA;
-}
-
-QScrollBar::sub-line:vertical{
-	width: 0;
-	height: 0;
-}
-
-QScrollBar::add-line:vertical{
-	width: 0;
-	height: 0;
-}</string>
+             <string notr="true"/>
             </property>
             <property name="widgetResizable">
              <bool>true</bool>
@@ -519,6 +748,9 @@ QScrollBar::add-line:vertical{
                <width>290</width>
                <height>308</height>
               </rect>
+             </property>
+             <property name="class" stdset="0">
+              <string>scrollarea_content</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_6">
               <property name="sizeConstraint">
@@ -538,108 +770,6 @@ QScrollBar::add-line:vertical{
               </property>
               <item>
                <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="links">
-         <attribute name="title">
-          <string>Links</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QScrollArea" name="links_scrollarea">
-            <property name="styleSheet">
-             <string notr="true">/* Vertical */
-QScrollBar:vertical{
-	border: none;
-	background-color: #313131;
-	width: 10px;
-	margin: 11px 0 11px 0; 
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical{
-	background-color: #a39e9e;
-	min-height: 30px;
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: #EAEAEA;
-}
-
-QScrollBar::sub-line:vertical{
-	width: 0;
-	height: 0;
-}
-
-QScrollBar::add-line:vertical{
-	width: 0;
-	height: 0;
-}</string>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignJustify|Qt::AlignTop</set>
-            </property>
-            <widget class="QWidget" name="links_scrollarea_content">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>290</width>
-               <height>308</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_11">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetMinimumSize</enum>
-              </property>
-              <property name="leftMargin">
-               <number>6</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer name="verticalSpacer_7">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -680,34 +810,7 @@ QScrollBar::add-line:vertical{
           <item>
            <widget class="QScrollArea" name="files_scrollarea">
             <property name="styleSheet">
-             <string notr="true">/* Vertical */
-QScrollBar:vertical{
-	border: none;
-	background-color: #313131;
-	width: 10px;
-	margin: 11px 0 11px 0; 
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical{
-	background-color: #a39e9e;
-	min-height: 30px;
-	border-radius: 5px;
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: #EAEAEA;
-}
-
-QScrollBar::sub-line:vertical{
-	width: 0;
-	height: 0;
-}
-
-QScrollBar::add-line:vertical{
-	width: 0;
-	height: 0;
-}</string>
+             <string notr="true"/>
             </property>
             <property name="widgetResizable">
              <bool>true</bool>
@@ -723,6 +826,9 @@ QScrollBar::add-line:vertical{
                <width>290</width>
                <height>308</height>
               </rect>
+             </property>
+             <property name="class" stdset="0">
+              <string>scrollarea_content</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_13">
               <property name="sizeConstraint">
@@ -742,6 +848,84 @@ QScrollBar::add-line:vertical{
               </property>
               <item>
                <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="links">
+         <attribute name="title">
+          <string>Links</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QScrollArea" name="links_scrollarea">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignJustify|Qt::AlignTop</set>
+            </property>
+            <widget class="QWidget" name="links_scrollarea_content">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>290</width>
+               <height>308</height>
+              </rect>
+             </property>
+             <property name="class" stdset="0">
+              <string>scrollarea_content</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMinimumSize</enum>
+              </property>
+              <property name="leftMargin">
+               <number>6</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="verticalSpacer_7">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>

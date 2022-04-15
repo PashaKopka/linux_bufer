@@ -1,7 +1,7 @@
 import sys
 
 import validators as validators
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
@@ -58,8 +58,8 @@ class MainWindow(QtWidgets.QWidget):
 		self.shortcuts = {
 			'<cmd>+v': self.show_window,
 		}
-		self._data = []
-		self._all_unions: list[QtWidgets.QPushButton] = []
+		self._data: list = []  # can`t use set because QImage is unhashable object
+		self._all_unions: set[QtWidgets.QPushButton] = set()
 
 		# set window parameters
 		self._setup_window()
@@ -96,14 +96,13 @@ class MainWindow(QtWidgets.QWidget):
 		image = self._clipboard.image()
 		file_urls = [x.path() for x in self._clipboard.mimeData().urls()]
 
-		# TODO crossing of sets
 		if text in self._data or image in self._data or file_urls in self._data:
 			# if data already in clipboard skip it
 			pass
 		else:
 			# add union to all_unions_scrollarea_content
 			union = self._add_clipboard_union_to_layout(self.ui.all_unions_scrollarea_content)
-			self._all_unions.append(union)
+			self._all_unions.add(union)
 
 			# add data to clipboard
 			if self._clipboard.mimeData().urls():
@@ -129,7 +128,7 @@ class MainWindow(QtWidgets.QWidget):
 			else:
 				raise TypeError('Now supports only text, image and files')
 
-			self._all_unions.append(union)
+			self._all_unions.add(union)
 
 	def _add_clipboard_union_to_layout(self, parent_widget: QtWidgets.QWidget) -> ClipboardUnion:
 		"""

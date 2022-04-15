@@ -17,17 +17,22 @@ class Ui_Form(object):
         Form.resize(300, 400)
         Form.setMinimumSize(QtCore.QSize(300, 400))
         Form.setMaximumSize(QtCore.QSize(300, 400))
-        Form.setStyleSheet("border: 1px solid #FFF;\n"
-"border-radius: 30px;\n"
-"background-color: #525252;")
+        Form.setStyleSheet(".main_window {\n"
+"    border: 1px solid #FFF;\n"
+"    border-radius: 30px;\n"
+"    background-color: #525252;\n"
+"}")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.frame = QtWidgets.QFrame(Form)
-        self.frame.setStyleSheet("background-color: #525252;\n"
-"border: 2 px solid #000;\n"
-"border-radius: 15px;")
+        self.frame.setStyleSheet(".frame {\n"
+"    background-color: #525252;\n"
+"    border: 2 px solid #000;\n"
+"    border-radius: 15px;\n"
+"}\n"
+"")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -64,6 +69,7 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.tabWidget = QtWidgets.QTabWidget(self.frame)
+        self.tabWidget.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.tabWidget.setStyleSheet("QTabBar::tab {\n"
 "    border: 2px solid #313131;\n"
 "    color: #fff;\n"
@@ -94,32 +100,31 @@ class Ui_Form(object):
 "QTabWidget::pane {\n"
 "    border: 0;\n"
 "    margin-top: 10px;\n"
-"}")
-        self.tabWidget.setUsesScrollButtons(True)
-        self.tabWidget.setDocumentMode(False)
-        self.tabWidget.setTabsClosable(False)
-        self.tabWidget.setMovable(True)
-        self.tabWidget.setObjectName("tabWidget")
-        self.all_unions = QtWidgets.QWidget()
-        self.all_unions.setObjectName("all_unions")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.all_unions)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.all_unions_scrollarea = QtWidgets.QScrollArea(self.all_unions)
-        self.all_unions_scrollarea.setStyleSheet("/* Vertical */\n"
+"}\n"
+"\n"
+".scrollarea_content {\n"
+"    background-color: #525252;\n"
+"}\n"
+"\n"
+"/* SCROLLAREA */\n"
+"\n"
+"QScrollArea {\n"
+"    background-color: #525252;\n"
+"    border: none;\n"
+"}\n"
+"\n"
 "QScrollBar:vertical{\n"
 "    border: none;\n"
-"    background-color: #313131;\n"
-"    width: 10px;\n"
-"    margin: 11px 0 11px 0; \n"
-"    border-radius: 5px;\n"
+"    background: transparent;\n"
+"    width: 6px;\n"
+"    margin: 7px 0 7px 0; \n"
+"    border-radius: 3px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical{\n"
-"    background-color: #a39e9e;\n"
+"    background-color: transparent;\n"
 "    min-height: 30px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 3px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:pressed{\n"
@@ -134,42 +139,153 @@ class Ui_Form(object):
 "QScrollBar::add-line:vertical{\n"
 "    width: 0;\n"
 "    height: 0;\n"
-"}")
+"}\n"
+"")
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.tabWidget.setElideMode(QtCore.Qt.ElideNone)
+        self.tabWidget.setUsesScrollButtons(True)
+        self.tabWidget.setDocumentMode(False)
+        self.tabWidget.setTabsClosable(False)
+        self.tabWidget.setMovable(True)
+        self.tabWidget.setTabBarAutoHide(False)
+        self.tabWidget.setObjectName("tabWidget")
+        self.all_unions = QtWidgets.QWidget()
+        self.all_unions.setStyleSheet("")
+        self.all_unions.setObjectName("all_unions")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.all_unions)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.all_unions_scrollarea = QtWidgets.QScrollArea(self.all_unions)
+        self.all_unions_scrollarea.setStyleSheet("")
+        self.all_unions_scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.all_unions_scrollarea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.all_unions_scrollarea.setWidgetResizable(True)
         self.all_unions_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.all_unions_scrollarea.setObjectName("all_unions_scrollarea")
         self.all_unions_scrollarea_content = QtWidgets.QWidget()
         self.all_unions_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
+        self.all_unions_scrollarea_content.setStyleSheet("")
         self.all_unions_scrollarea_content.setObjectName("all_unions_scrollarea_content")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.all_unions_scrollarea_content)
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_2.setContentsMargins(6, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pasteObject1_16 = QtWidgets.QPushButton(self.all_unions_scrollarea_content)
-        self.pasteObject1_16.setMinimumSize(QtCore.QSize(0, 100))
-        self.pasteObject1_16.setMaximumSize(QtCore.QSize(265, 100))
-        self.pasteObject1_16.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.pasteObject1_16.setAccessibleDescription("")
-        self.pasteObject1_16.setStyleSheet("QPushButton{\n"
+        self.clipboard_union_4 = QtWidgets.QWidget(self.all_unions_scrollarea_content)
+        self.clipboard_union_4.setMinimumSize(QtCore.QSize(0, 100))
+        self.clipboard_union_4.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.clipboard_union_4.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.clipboard_union_4.setStyleSheet(".clipboard_union{\n"
+"    border: 2px solid #313131;\n"
+"    color: #fff;\n"
+"    border-radius: 10px;\n"
+"    background-color: #414141;\n"
+"}\n"
+"\n"
+".clipboard_union:hover{\n"
+"    border: 2px solid #08ffc8;\n"
+"}\n"
+"\n"
+".clipboard_union:pressed{\n"
+"    background-color: #313131;\n"
+"    border: 2px solid #08ffc8;\n"
+"}")
+        self.clipboard_union_4.setObjectName("clipboard_union_4")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.clipboard_union_4)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.text_3 = QtWidgets.QLabel(self.clipboard_union_4)
+        self.text_3.setMinimumSize(QtCore.QSize(150, 100))
+        self.text_3.setStyleSheet("color: #fff;\n"
+"text-align:left top;\n"
+"padding: 22px 20px 22px 10px;")
+        self.text_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.text_3.setWordWrap(True)
+        self.text_3.setObjectName("text_3")
+        self.horizontalLayout_6.addWidget(self.text_3)
+        self.props_2 = QtWidgets.QWidget(self.clipboard_union_4)
+        self.props_2.setMinimumSize(QtCore.QSize(60, 0))
+        self.props_2.setMaximumSize(QtCore.QSize(40, 16777215))
+        self.props_2.setStyleSheet("margin: 0px 10px 0 0;")
+        self.props_2.setObjectName("props_2")
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.props_2)
+        self.verticalLayout_16.setContentsMargins(0, 7, 0, 10)
+        self.verticalLayout_16.setSpacing(0)
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        self.datetime_2 = QtWidgets.QLabel(self.props_2)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.datetime_2.setFont(font)
+        self.datetime_2.setStyleSheet("color: #fff;")
+        self.datetime_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.datetime_2.setObjectName("datetime_2")
+        self.verticalLayout_16.addWidget(self.datetime_2)
+        self.label_3 = QtWidgets.QLabel(self.props_2)
+        self.label_3.setText("")
+        self.label_3.setPixmap(QtGui.QPixmap("interface/../../../../Downloads/Hnet.com-image.png"))
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_16.addWidget(self.label_3)
+        self.horizontalLayout_6.addWidget(self.props_2)
+        self.verticalLayout_2.addWidget(self.clipboard_union_4)
+        self.clipboard_union = QtWidgets.QWidget(self.all_unions_scrollarea_content)
+        self.clipboard_union.setMinimumSize(QtCore.QSize(0, 100))
+        self.clipboard_union.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.clipboard_union.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.clipboard_union.setStyleSheet(".clipboard_union{\n"
 "    border: 2px solid #313131;\n"
 "    color: #fff;\n"
 "    border-radius: 10px;\n"
 "    background-color: #414141;\n"
 "    text-align:left top;\n"
-"    padding: 5px;\n"
+"    padding: 21px 70px 21px 20px;\n"
 "}\n"
 "\n"
-"QPushButton:hover{\n"
+".clipboard_union:hover{\n"
 "    border: 2px solid #08ffc8;\n"
 "}\n"
 "\n"
-"QPushButton:pressed{\n"
+".clipboard_union:pressed{\n"
 "    background-color: #313131;\n"
 "    border: 2px solid #08ffc8;\n"
 "}")
-        self.pasteObject1_16.setCheckable(True)
-        self.pasteObject1_16.setObjectName("pasteObject1_16")
-        self.verticalLayout_2.addWidget(self.pasteObject1_16)
+        self.clipboard_union.setObjectName("clipboard_union")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.clipboard_union)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.props = QtWidgets.QWidget(self.clipboard_union)
+        self.props.setMinimumSize(QtCore.QSize(60, 0))
+        self.props.setMaximumSize(QtCore.QSize(40, 16777215))
+        self.props.setStyleSheet("margin: 0px 5px;")
+        self.props.setObjectName("props")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.props)
+        self.verticalLayout_8.setContentsMargins(0, 7, 0, 10)
+        self.verticalLayout_8.setSpacing(0)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.datetime = QtWidgets.QLabel(self.props)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.datetime.setFont(font)
+        self.datetime.setStyleSheet("color: #fff;")
+        self.datetime.setAlignment(QtCore.Qt.AlignCenter)
+        self.datetime.setObjectName("datetime")
+        self.verticalLayout_8.addWidget(self.datetime)
+        self.label_2 = QtWidgets.QLabel(self.props)
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("interface/../../../../Downloads/Hnet.com-image.png"))
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_8.addWidget(self.label_2)
+        self.horizontalLayout_4.addWidget(self.props)
+        self.text_2 = QtWidgets.QLabel(self.clipboard_union)
+        self.text_2.setMinimumSize(QtCore.QSize(150, 100))
+        self.text_2.setStyleSheet("color: #fff;\n"
+"text-align:left top;\n"
+"padding: 22px 20px 22px 5px;")
+        self.text_2.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.text_2.setWordWrap(True)
+        self.text_2.setObjectName("text_2")
+        self.horizontalLayout_4.addWidget(self.text_2)
+        self.verticalLayout_2.addWidget(self.clipboard_union)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem2)
         self.all_unions_scrollarea.setWidget(self.all_unions_scrollarea_content)
@@ -182,34 +298,7 @@ class Ui_Form(object):
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.text_scrollarea = QtWidgets.QScrollArea(self.text)
-        self.text_scrollarea.setStyleSheet("/* Vertical */\n"
-"QScrollBar:vertical{\n"
-"    border: none;\n"
-"    background-color: #313131;\n"
-"    width: 10px;\n"
-"    margin: 11px 0 11px 0; \n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical{\n"
-"    background-color: #a39e9e;\n"
-"    min-height: 30px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:pressed{\n"
-"    background-color: #EAEAEA;\n"
-"}\n"
-"\n"
-"QScrollBar::sub-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}")
+        self.text_scrollarea.setStyleSheet("")
         self.text_scrollarea.setWidgetResizable(True)
         self.text_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.text_scrollarea.setObjectName("text_scrollarea")
@@ -232,34 +321,7 @@ class Ui_Form(object):
         self.verticalLayout_10.setSpacing(0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.images_scrollarea = QtWidgets.QScrollArea(self.images)
-        self.images_scrollarea.setStyleSheet("/* Vertical */\n"
-"QScrollBar:vertical{\n"
-"    border: none;\n"
-"    background-color: #313131;\n"
-"    width: 10px;\n"
-"    margin: 11px 0 11px 0; \n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical{\n"
-"    background-color: #a39e9e;\n"
-"    min-height: 30px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:pressed{\n"
-"    background-color: #EAEAEA;\n"
-"}\n"
-"\n"
-"QScrollBar::sub-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}")
+        self.images_scrollarea.setStyleSheet("")
         self.images_scrollarea.setWidgetResizable(True)
         self.images_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.images_scrollarea.setObjectName("images_scrollarea")
@@ -275,56 +337,6 @@ class Ui_Form(object):
         self.images_scrollarea.setWidget(self.images_scrollarea_content)
         self.verticalLayout_10.addWidget(self.images_scrollarea)
         self.tabWidget.addTab(self.images, "")
-        self.links = QtWidgets.QWidget()
-        self.links.setObjectName("links")
-        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.links)
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_12.setSpacing(0)
-        self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.links_scrollarea = QtWidgets.QScrollArea(self.links)
-        self.links_scrollarea.setStyleSheet("/* Vertical */\n"
-"QScrollBar:vertical{\n"
-"    border: none;\n"
-"    background-color: #313131;\n"
-"    width: 10px;\n"
-"    margin: 11px 0 11px 0; \n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical{\n"
-"    background-color: #a39e9e;\n"
-"    min-height: 30px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:pressed{\n"
-"    background-color: #EAEAEA;\n"
-"}\n"
-"\n"
-"QScrollBar::sub-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}")
-        self.links_scrollarea.setWidgetResizable(True)
-        self.links_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
-        self.links_scrollarea.setObjectName("links_scrollarea")
-        self.links_scrollarea_content = QtWidgets.QWidget()
-        self.links_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
-        self.links_scrollarea_content.setObjectName("links_scrollarea_content")
-        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.links_scrollarea_content)
-        self.verticalLayout_11.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
-        self.verticalLayout_11.setContentsMargins(6, 0, 0, 0)
-        self.verticalLayout_11.setObjectName("verticalLayout_11")
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_11.addItem(spacerItem5)
-        self.links_scrollarea.setWidget(self.links_scrollarea_content)
-        self.verticalLayout_12.addWidget(self.links_scrollarea)
-        self.tabWidget.addTab(self.links, "")
         self.files = QtWidgets.QWidget()
         self.files.setObjectName("files")
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.files)
@@ -332,34 +344,7 @@ class Ui_Form(object):
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.files_scrollarea = QtWidgets.QScrollArea(self.files)
-        self.files_scrollarea.setStyleSheet("/* Vertical */\n"
-"QScrollBar:vertical{\n"
-"    border: none;\n"
-"    background-color: #313131;\n"
-"    width: 10px;\n"
-"    margin: 11px 0 11px 0; \n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical{\n"
-"    background-color: #a39e9e;\n"
-"    min-height: 30px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical:pressed{\n"
-"    background-color: #EAEAEA;\n"
-"}\n"
-"\n"
-"QScrollBar::sub-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical{\n"
-"    width: 0;\n"
-"    height: 0;\n"
-"}")
+        self.files_scrollarea.setStyleSheet("")
         self.files_scrollarea.setWidgetResizable(True)
         self.files_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
         self.files_scrollarea.setObjectName("files_scrollarea")
@@ -370,11 +355,34 @@ class Ui_Form(object):
         self.verticalLayout_13.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_13.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem6)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_13.addItem(spacerItem5)
         self.files_scrollarea.setWidget(self.files_scrollarea_content)
         self.verticalLayout_14.addWidget(self.files_scrollarea)
         self.tabWidget.addTab(self.files, "")
+        self.links = QtWidgets.QWidget()
+        self.links.setObjectName("links")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.links)
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_12.setSpacing(0)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.links_scrollarea = QtWidgets.QScrollArea(self.links)
+        self.links_scrollarea.setStyleSheet("")
+        self.links_scrollarea.setWidgetResizable(True)
+        self.links_scrollarea.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignTop)
+        self.links_scrollarea.setObjectName("links_scrollarea")
+        self.links_scrollarea_content = QtWidgets.QWidget()
+        self.links_scrollarea_content.setGeometry(QtCore.QRect(0, 0, 290, 308))
+        self.links_scrollarea_content.setObjectName("links_scrollarea_content")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.links_scrollarea_content)
+        self.verticalLayout_11.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.verticalLayout_11.setContentsMargins(6, 0, 0, 0)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_11.addItem(spacerItem6)
+        self.links_scrollarea.setWidget(self.links_scrollarea_content)
+        self.verticalLayout_12.addWidget(self.links_scrollarea)
+        self.tabWidget.addTab(self.links, "")
         self.verticalLayout_3.addWidget(self.tabWidget)
         self.verticalLayout_4.addWidget(self.frame)
 
@@ -385,12 +393,22 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setProperty("class", _translate("Form", "main_window"))
+        self.frame.setProperty("class", _translate("Form", "frame"))
         self.searchbar.setPlaceholderText(_translate("Form", "Type to Search..."))
-        self.pasteObject1_16.setText(_translate("Form", "123\n"
-"t1\\t\n"
-"    1"))
+        self.all_unions_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
+        self.clipboard_union_4.setProperty("class", _translate("Form", "clipboard_union"))
+        self.text_3.setText(_translate("Form", "TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel "))
+        self.datetime_2.setText(_translate("Form", "01.01.21"))
+        self.clipboard_union.setProperty("class", _translate("Form", "clipboard_union"))
+        self.datetime.setText(_translate("Form", "01.01.21"))
+        self.text_2.setText(_translate("Form", "TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel "))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.all_unions), _translate("Form", "All"))
+        self.text_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.text), _translate("Form", "Text"))
+        self.images_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.images), _translate("Form", "Images"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.links), _translate("Form", "Links"))
+        self.files_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.files), _translate("Form", "Files"))
+        self.links_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.links), _translate("Form", "Links"))

@@ -24,7 +24,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		# list of urls to selected files
 		self._files_urls = [x.path() for x in self._clipboard.mimeData().urls()]
 
-		self._normalize_widget()
+		self._create_widget()
 		self._parent_window = parent_window  # Need parent window to hiding it
 
 	def _paste(self) -> None:
@@ -62,30 +62,25 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		else:
 			raise TypeError('Now supports only text, image and files')
 
-	def _normalize_widget(self) -> None:
+	def _create_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
 		if self._files_urls:
 			# if user copy file
 			file_names = [x.rsplit('/', 1)[-1] for x in self._files_urls]
-			self.setText('\n'.join(file_names))
-			self._set_standard_styles(text_align='left top')
+			self._create_standard_clipboard_union()
+			self.text.setText('\n'.join(file_names))
+			self._set_application_icon()
 
 		elif self._text:
-			# TODO add icon of active application
-			if not self._text.count('\n') or self._text.find('\n') == (len(self._text) - 1):
-				# if string is oneline we need to wrap it
-				# so we need to create label to wrap text
-				self._add_label_to_union()
-			else:
-				# if we have many lines in string we just put text in prepared button
-				self.setText(self._text.replace('\t', '    '))
-
-			# set standard styles for button (union)
-			self._set_standard_styles(text_align='left top')
+			# set standard styles for union
+			self._create_standard_clipboard_union()
+			self.text.setText(self._text.replace('\t', '    '))
+			self._set_application_icon()
 
 		elif self._image:
 			# if user copy image
 			# TODO add function of saving image
+			# TODO need to change from standard clipboard union to image clipboard union
 			self._set_standard_styles(text_align='center')
 
 			# set icon
@@ -96,52 +91,44 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		else:
 			raise TypeError('Now supports only text, image and files')
 
-	def _add_label_to_union(self) -> None:
+	def _set_application_icon(self):
 		"""
-		adding union in self layout
+		Sets icon to self.logo
+		it`s icon of application, from which was copied data
 		"""
-		# TODO label dont change background fixit!
-		label: QtWidgets.QLabel = self._create_standard_label()
-		# create layout for button and put label there
-		layout = QtWidgets.QHBoxLayout(self)
-		layout.addWidget(label, 0, QtCore.Qt.AlignCenter)
+		# TODO Wayland
+		# TODO Problem with Slack, maybe something else
 
-	def _create_standard_label(self) -> QtWidgets.QLabel:
-		"""
-		function create standard label for union and return it
-		"""
-		# TODO if string contains of big words, than split it by \n
-		label = QtWidgets.QLabel(self._text, self)
-		label.setWordWrap(True)
-		label.setStyleSheet(
-			'color: #fff;'
-			'background-color: #414141;'
-			# 'text-align:left top;'
-			'padding: 0;'
-		)
-		size = QtCore.QSize(250, 85)
-		label.setFixedSize(size)
-		label.setAlignment(QtCore.Qt.AlignLeft)
-		label.setAlignment(QtCore.Qt.AlignTop)
-		return label
+		import gi
+		gi.require_version('Wnck', '3.0')
+		gi.require_version('Gtk', '3.0')
+		from gi.repository import Wnck
 
-	def _set_standard_styles(self, text_align: str) -> None:
-		"""
-		standard looking of button of clipboard
-		:param text_align: text align of the button
-			for image -> center, for text -> left top
-		"""
+		current_screen = Wnck.Screen.get_default()
+		current_screen.force_update()
+
+		active_window = current_screen.get_active_window()
+		icon_of_active_window = active_window.get_icon()
+		image_binary_data = icon_of_active_window.read_pixel_bytes().get_data()
+
+		# format that equals to GdkPixbuf
+		image = QtGui.QImage(image_binary_data, 32, 32, QtGui.QImage.Format.Format_RGBA8888)
+		icon_pixmap = QtGui.QPixmap().fromImage(image)
+		self.logo.setPixmap(icon_pixmap)
+
+	def _create_standard_clipboard_union(self) -> None:
+		self.setObjectName('clipboard_union')
 		self.setMinimumSize(QtCore.QSize(0, 100))
-		self.setMaximumSize(QtCore.QSize(265, 100))
-		self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+		self.setMaximumSize(QtCore.QSize(16777215, 100))
+		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
 		self.setStyleSheet(
 			"QPushButton{\n"
 			"    border: 2px solid #313131;\n"
 			"    color: #fff;\n"
 			"    border-radius: 10px;\n"
 			"    background-color: #414141;\n"
-			"    padding: 5px;\n"
-			f"    text-align:{text_align};\n"
+			"    text-align:left top;\n"
+			"    padding: 21px 70px 21px 20px;\n"
 			"}\n"
 			"\n"
 			"QPushButton:hover{\n"
@@ -153,5 +140,45 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			"    border: 2px solid #08ffc8;\n"
 			"}"
 		)
-		self.setCheckable(True)
-		self.setObjectName("pasteObject1")
+
+		self.horizontal_layout = QtWidgets.QHBoxLayout(self)
+		self.horizontal_layout.setContentsMargins(0, 0, 0, 0)
+
+		self.props = QtWidgets.QWidget(self)
+		self.props.setMinimumSize(QtCore.QSize(62, 0))
+		self.props.setMaximumSize(QtCore.QSize(40, 16777215))
+		self.props.setStyleSheet("margin: 0px 10px 0 0;")
+
+		self.verticalLayout = QtWidgets.QVBoxLayout(self.props)
+		self.verticalLayout.setContentsMargins(0, 7, 0, 10)
+		self.verticalLayout.setSpacing(0)
+
+		self.datetime = QtWidgets.QLabel(self.props)
+		self.font = QtGui.QFont()
+		self.font.setPointSize(9)
+		self.datetime.setFont(self.font)
+		self.datetime.setStyleSheet("color: #fff;")
+		self.datetime.setAlignment(QtCore.Qt.AlignCenter)
+		time_string = time.strftime('%H:%M', time.localtime())
+		self.datetime.setText(time_string)
+
+		self.verticalLayout.addWidget(self.datetime)
+
+		self.logo = QtWidgets.QLabel(self.props)
+		self.logo.setMinimumSize(QtCore.QSize(32, 32))
+		self.logo.setText("")
+
+		self.verticalLayout.addWidget(self.logo)
+		self.horizontal_layout.addWidget(self.props)
+
+		self.text = QtWidgets.QLabel(self)
+		self.text.setMinimumSize(QtCore.QSize(150, 100))
+		self.text.setStyleSheet(
+			"color: #fff;\n"
+			"text-align:left top;\n"
+			"padding: 22px 20px 22px 10px;"
+		)
+		self.text.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+		self.text.setWordWrap(True)
+
+		self.horizontal_layout.insertWidget(0, self.text)
