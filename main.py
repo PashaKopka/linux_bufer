@@ -115,11 +115,11 @@ class MainWindow(QtWidgets.QWidget):
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
 	def _search_unions(self, text):
-		for widget in self.all_unions:
-			if self.text_in_widget(widget, text):
-				widget.show()
+		for union in self.all_unions:
+			if union.has_text(text):
+				union.show()
 			else:
-				widget.hide()
+				union.hide()
 
 	def event(self, event: QtCore.QEvent) -> bool:
 		"""
@@ -132,16 +132,16 @@ class MainWindow(QtWidgets.QWidget):
 			self.event(QtCore.QEvent(QtCore.QEvent.WindowDeactivate))
 		return super().event(event)
 
-	@staticmethod
-	def text_in_widget(widget: QtWidgets.QPushButton, text: str) -> bool:
-		try:
-			widget_text = widget.children()[0].text().lower()
-		except IndexError:
-			widget_text = widget.text()
-
-		if text.lower() in widget_text:
-			return True
-		return False
+	# @staticmethod
+	# def text_in_widget(widget: QtWidgets.QPushButton, text: str) -> bool:
+	# 	try:
+	# 		widget_text = widget.children()[0].text().lower()
+	# 	except IndexError:
+	# 		widget_text = widget.text()
+	#
+	# 	if text.lower() in widget_text:
+	# 		return True
+	# 	return False
 
 
 if __name__ == '__main__':

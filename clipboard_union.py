@@ -55,6 +55,10 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		self.logo.setPixmap(icon_pixmap)
 
 	@abc.abstractmethod
+	def has_text(self, text: str) -> bool:
+		pass
+
+	@abc.abstractmethod
 	def update_clipboard(self):
 		pass
 
@@ -91,6 +95,11 @@ class TextClipboardUnion(ClipboardUnion):
 		and then you can paste this data
 		"""
 		self._clipboard.setText(self._text)
+
+	def has_text(self, text: str) -> bool:
+		if text.lower() in self.text.text():
+			return True
+		return False
 
 	def _create_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
@@ -191,6 +200,12 @@ class ImageClipboardUnion(ClipboardUnion):
 	def update_clipboard(self):
 		self._clipboard.setImage(self._image)
 
+	def has_text(self, text: str) -> bool:
+		"""image can`t has text"""
+		if not text:
+			return True
+		return False
+
 	def _create_widget(self):
 		# TODO add function of saving image
 		self._create_standard_clipboard_union()
@@ -274,6 +289,11 @@ class FileClipboardUnion(ClipboardUnion):
 		self._create_widget()
 		self._parent_window = parent_window  # Need parent window to hiding it
 
+	def has_text(self, text: str) -> bool:
+		if text.lower() in self.text.text():
+			return True
+		return False
+
 	def update_clipboard(self):
 		data = QtCore.QMimeData()
 		urls = [QtCore.QUrl.fromLocalFile(x) for x in self._files_urls]
@@ -284,6 +304,7 @@ class FileClipboardUnion(ClipboardUnion):
 		file_names = [x.rsplit('/', 1)[-1] for x in self._files_urls]
 		self._create_standard_clipboard_union()
 		self.text.setText('\n'.join(file_names))
+		self.set_application_icon()
 
 	def _create_standard_clipboard_union(self):
 		self.setMinimumSize(QtCore.QSize(0, 100))
@@ -334,6 +355,8 @@ class FileClipboardUnion(ClipboardUnion):
 		self.datetime.setFont(font)
 		self.datetime.setStyleSheet("color: #fff;")
 		self.datetime.setAlignment(QtCore.Qt.AlignCenter)
+		time_string = time.strftime('%H:%M', time.localtime())
+		self.datetime.setText(time_string)
 
 		self.verticalLayout.addWidget(self.datetime)
 
