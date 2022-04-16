@@ -492,6 +492,71 @@ class Ui_Form(object):
         self.verticalLayout_11.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.verticalLayout_11.setContentsMargins(6, 0, 0, 0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.clipboard_union_6 = QtWidgets.QWidget(self.links_scrollarea_content)
+        self.clipboard_union_6.setMinimumSize(QtCore.QSize(0, 100))
+        self.clipboard_union_6.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.clipboard_union_6.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.clipboard_union_6.setStyleSheet(".clipboard_union{\n"
+"    border: 2px solid #313131;\n"
+"    color: #fff;\n"
+"    border-radius: 10px;\n"
+"    background-color: #414141;\n"
+"}\n"
+"\n"
+".clipboard_union:hover{\n"
+"    border: 2px solid #08ffc8;\n"
+"}\n"
+"\n"
+".clipboard_union:pressed{\n"
+"    background-color: #313131;\n"
+"    border: 2px solid #08ffc8;\n"
+"}")
+        self.clipboard_union_6.setObjectName("clipboard_union_6")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.clipboard_union_6)
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.text_5 = QtWidgets.QLabel(self.clipboard_union_6)
+        self.text_5.setMinimumSize(QtCore.QSize(150, 100))
+        self.text_5.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.text_5.setStyleSheet("QLabel {\n"
+"    color: #41b6e6;\n"
+"    text-align:left top;\n"
+"    padding: 22px 20px 22px 10px;\n"
+"}\n"
+"\n"
+"QLabel:hover{\n"
+"    \n"
+"}")
+        self.text_5.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.text_5.setWordWrap(True)
+        self.text_5.setObjectName("text_5")
+        self.horizontalLayout_8.addWidget(self.text_5)
+        self.props_5 = QtWidgets.QWidget(self.clipboard_union_6)
+        self.props_5.setMinimumSize(QtCore.QSize(60, 0))
+        self.props_5.setMaximumSize(QtCore.QSize(40, 16777215))
+        self.props_5.setStyleSheet("margin: 0px 10px 0 0;")
+        self.props_5.setObjectName("props_5")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.props_5)
+        self.verticalLayout_21.setContentsMargins(0, 7, 0, 10)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.datetime_4 = QtWidgets.QLabel(self.props_5)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.datetime_4.setFont(font)
+        self.datetime_4.setStyleSheet("color: #fff;")
+        self.datetime_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.datetime_4.setObjectName("datetime_4")
+        self.verticalLayout_21.addWidget(self.datetime_4)
+        self.label_5 = QtWidgets.QLabel(self.props_5)
+        self.label_5.setText("")
+        self.label_5.setPixmap(QtGui.QPixmap("interface/../../../../Downloads/Hnet.com-image.png"))
+        self.label_5.setScaledContents(False)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_21.addWidget(self.label_5)
+        self.horizontalLayout_8.addWidget(self.props_5)
+        self.verticalLayout_11.addWidget(self.clipboard_union_6)
         spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_11.addItem(spacerItem7)
         self.links_scrollarea.setWidget(self.links_scrollarea_content)
@@ -530,4 +595,7 @@ class Ui_Form(object):
         self.datetime_3.setText(_translate("Form", "01.01.21"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.files), _translate("Form", "Files"))
         self.links_scrollarea_content.setProperty("class", _translate("Form", "scrollarea_content"))
+        self.clipboard_union_6.setProperty("class", _translate("Form", "clipboard_union"))
+        self.text_5.setText(_translate("Form", "https://youtu.be/TTzy4309R5o"))
+        self.datetime_4.setText(_translate("Form", "01.01.21"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.links), _translate("Form", "Links"))

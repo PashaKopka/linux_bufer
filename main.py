@@ -132,17 +132,6 @@ class MainWindow(QtWidgets.QWidget):
 			self.event(QtCore.QEvent(QtCore.QEvent.WindowDeactivate))
 		return super().event(event)
 
-	# @staticmethod
-	# def text_in_widget(widget: QtWidgets.QPushButton, text: str) -> bool:
-	# 	try:
-	# 		widget_text = widget.children()[0].text().lower()
-	# 	except IndexError:
-	# 		widget_text = widget.text()
-	#
-	# 	if text.lower() in widget_text:
-	# 		return True
-	# 	return False
-
 
 if __name__ == '__main__':
 	app = QtWidgets.QApplication([])

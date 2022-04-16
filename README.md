@@ -13,5 +13,6 @@
 4. `#08ffc8` - accent color
 5. `#1ee3cf` - more accent color
 6. `#a39e9e` - light background
+6. `#1F6ED4` - blue (links for example)
 
 ![img.png](docs/sources/img.png)
