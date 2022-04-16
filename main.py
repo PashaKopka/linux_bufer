@@ -1,11 +1,10 @@
 import sys
 
-import validators as validators
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
-from clipboard_union import ClipboardUnion
+from clipboard_union import ClipboardUnionFactory
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
 
@@ -32,6 +31,7 @@ class ShortCutFactory:
 		"""
 		activate shortcut listener
 		"""
+
 		def for_canonical(function):
 			return lambda args: function(listener.canonical(args))
 
@@ -58,8 +58,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.shortcuts = {
 			'<cmd>+v': self.show_window,
 		}
-		self._data: list = []  # can`t use set because QImage is unhashable object
-		self._all_unions: set[QtWidgets.QPushButton] = set()
+		self.all_unions: set[QtWidgets.QPushButton] = set()
 
 		# set window parameters
 		self._setup_window()
@@ -67,9 +66,21 @@ class MainWindow(QtWidgets.QWidget):
 		# activate shortcuts listening
 		self._activate_shortcuts()
 
-		# activate clipboard handler
+		# layouts links
+		self._layouts = {
+			'all_unions': self.ui.all_unions_scrollarea_content,
+			'text': self.ui.text_scrollarea_content,
+			'image': self.ui.images_scrollarea_content,
+			'file': self.ui.files_scrollarea_content,
+			'link': self.ui.links_scrollarea_content
+		}
+		# activate clipboard handler and clipboard unions factory
 		self._clipboard = QtWidgets.QApplication.clipboard()
-		self._clipboard.dataChanged.connect(self._add_clipboard_union)
+		self._clipboard_union_factory = ClipboardUnionFactory(
+			self._clipboard,
+			parent_window=self,
+			layouts=self._layouts
+		)
 
 		# activate search
 		self.ui.searchbar.textChanged.connect(self._search_unions)
@@ -86,59 +97,6 @@ class MainWindow(QtWidgets.QWidget):
 
 	def hide_window(self):
 		self.hide()
-
-	def _add_clipboard_union(self):
-		"""
-		adding clipboard union to interface and data to self._data
-		function calling if clipboard updates
-		"""
-		text = self._clipboard.text()
-		image = self._clipboard.image()
-		file_urls = [x.path() for x in self._clipboard.mimeData().urls()]
-
-		if text in self._data or image in self._data or file_urls in self._data:
-			# if data already in clipboard skip it
-			pass
-		else:
-			# add union to all_unions_scrollarea_content
-			union = self._add_clipboard_union_to_layout(self.ui.all_unions_scrollarea_content)
-			self._all_unions.add(union)
-
-			# add data to clipboard
-			if self._clipboard.mimeData().urls():
-				# if we have url in urls list -> user copied file
-				self._data.append(file_urls)
-				union = self._add_clipboard_union_to_layout(self.ui.files_scrollarea_content)
-
-			elif not self._clipboard.pixmap().isNull():
-				# if copied data is image
-				self._data.append(image)
-				union = self._add_clipboard_union_to_layout(self.ui.images_scrollarea_content)
-
-			elif text:
-				if validators.url(text):
-					# if text looks like link
-					union = self._add_clipboard_union_to_layout(self.ui.links_scrollarea_content)
-				else:
-					# just simple text
-					union = self._add_clipboard_union_to_layout(self.ui.text_scrollarea_content)
-
-				self._data.append(text)
-
-			else:
-				raise TypeError('Now supports only text, image and files')
-
-			self._all_unions.add(union)
-
-	def _add_clipboard_union_to_layout(self, parent_widget: QtWidgets.QWidget) -> ClipboardUnion:
-		"""
-		create clipboard union and add it to _layout
-		:param parent_widget: widget in which union will be added
-		"""
-		layout = parent_widget.layout()
-		union = ClipboardUnion(self._clipboard, parent_widget, self)
-		layout.insertWidget(0, union)
-		return union
 
 	def _activate_shortcuts(self):
 		"""
@@ -157,7 +115,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
 	def _search_unions(self, text):
-		for widget in self._all_unions:
+		for widget in self.all_unions:
 			if self.text_in_widget(widget, text):
 				widget.show()
 			else:
