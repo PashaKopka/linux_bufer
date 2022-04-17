@@ -470,149 +470,6 @@ padding: 22px 20px 22px 10px;</string>
                </widget>
               </item>
               <item>
-               <widget class="QWidget" name="clipboard_union" native="true">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>100</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>100</height>
-                 </size>
-                </property>
-                <property name="contextMenuPolicy">
-                 <enum>Qt::DefaultContextMenu</enum>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">.clipboard_union{
-	border: 2px solid #313131;
-	color: #fff;
-	border-radius: 10px;
-	background-color: #414141;
-	text-align:left top;
-	padding: 21px 70px 21px 20px;
-}
-
-.clipboard_union:hover{
-	border: 2px solid #08ffc8;
-}
-
-.clipboard_union:pressed{
-	background-color: #313131;
-	border: 2px solid #08ffc8;
-}</string>
-                </property>
-                <property name="class" stdset="0">
-                 <string>clipboard_union</string>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QWidget" name="props" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>60</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>40</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">margin: 0px 5px;</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_8">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>7</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>10</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="datetime">
-                      <property name="font">
-                       <font>
-                        <pointsize>9</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: #fff;</string>
-                      </property>
-                      <property name="text">
-                       <string>01.01.21</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_2">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="pixmap">
-                       <pixmap>../../../../Downloads/Hnet.com-image.png</pixmap>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="text_2">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>100</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">color: #fff;
-text-align:left top;
-padding: 22px 20px 22px 5px;</string>
-                   </property>
-                   <property name="text">
-                    <string>TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel TextLabel </string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                   </property>
-                   <property name="wordWrap">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
                <spacer name="verticalSpacer">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -667,8 +524,8 @@ padding: 22px 20px 22px 5px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>290</width>
-               <height>308</height>
+               <width>100</width>
+               <height>30</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -751,8 +608,8 @@ padding: 22px 20px 22px 5px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>290</width>
-               <height>308</height>
+               <width>145</width>
+               <height>206</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -954,8 +811,8 @@ text-align:left top;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>290</width>
-               <height>308</height>
+               <width>242</width>
+               <height>146</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -1195,8 +1052,8 @@ padding: 22px 20px 22px 0px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>290</width>
-               <height>308</height>
+               <width>222</width>
+               <height>146</height>
               </rect>
              </property>
              <property name="class" stdset="0">

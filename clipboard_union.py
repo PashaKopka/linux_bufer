@@ -12,7 +12,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 	def __init__(self, parent: QtWidgets.QWidget):
 		super().__init__(parent)
 
-	def paste(self):
+	def paste(self) -> None:
 		"""
 		paste clipboard data
 		hide main window and then use shortcut <Ctrl>+V
@@ -29,7 +29,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 			keyboard_controller.press('v')
 			keyboard_controller.release('v')
 
-	def set_application_icon(self):
+	def set_application_icon(self) -> None:
 		"""
 		Sets icon to self.logo
 		it`s icon of application, from which was copied data
@@ -56,18 +56,22 @@ class ClipboardUnion(QtWidgets.QPushButton):
 
 	@abc.abstractmethod
 	def has_text(self, text: str) -> bool:
+		"""it is function to check if union has text inside"""
 		pass
 
 	@abc.abstractmethod
-	def update_clipboard(self):
+	def update_clipboard(self) -> None:
+		"""if user choose union then union should set self.data clipboard"""
 		pass
 
 	@abc.abstractmethod
-	def _create_widget(self):
+	def _create_widget(self) -> None:
+		"""all widgets must create self, set styles and activate some functions"""
 		pass
 
 	@abc.abstractmethod
-	def _create_standard_clipboard_union(self):
+	def _create_standard_clipboard_union(self) -> None:
+		"""all widgets should create own styles, or copy realisation from parent"""
 		pass
 
 
@@ -97,6 +101,10 @@ class TextClipboardUnion(ClipboardUnion):
 		self._clipboard.setText(self._text)
 
 	def has_text(self, text: str) -> bool:
+		"""
+		function using for searching for unions
+		if union has text, that user typed, inside -> return True
+		"""
 		if text.lower() in self.text.text():
 			return True
 		return False
@@ -197,7 +205,7 @@ class ImageClipboardUnion(ClipboardUnion):
 		self._create_widget()
 		self._parent_window = parent_window  # Need parent window to hiding it
 
-	def update_clipboard(self):
+	def update_clipboard(self) -> None:
 		self._clipboard.setImage(self._image)
 
 	def has_text(self, text: str) -> bool:
@@ -206,7 +214,7 @@ class ImageClipboardUnion(ClipboardUnion):
 			return True
 		return False
 
-	def _create_widget(self):
+	def _create_widget(self) -> None:
 		# TODO add function of saving image
 		self._create_standard_clipboard_union()
 
@@ -217,7 +225,7 @@ class ImageClipboardUnion(ClipboardUnion):
 		self.image.setMaximumSize(size.width(), size.height())
 		self.image.setPixmap(self._pixel_map)
 
-	def _create_standard_clipboard_union(self):
+	def _create_standard_clipboard_union(self) -> None:
 		self.setEnabled(True)
 		self.setMinimumSize(QtCore.QSize(139, 200))
 		self.setMaximumSize(QtCore.QSize(280, 200))
@@ -294,19 +302,19 @@ class FileClipboardUnion(ClipboardUnion):
 			return True
 		return False
 
-	def update_clipboard(self):
+	def update_clipboard(self) -> None:
 		data = QtCore.QMimeData()
 		urls = [QtCore.QUrl.fromLocalFile(x) for x in self._files_urls]
 		data.setUrls(urls)
 		self._clipboard.setMimeData(data)
 
-	def _create_widget(self):
+	def _create_widget(self) -> None:
 		file_names = [x.rsplit('/', 1)[-1] for x in self._files_urls]
 		self._create_standard_clipboard_union()
 		self.text.setText('\n'.join(file_names))
 		self.set_application_icon()
 
-	def _create_standard_clipboard_union(self):
+	def _create_standard_clipboard_union(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 100))
 		self.setMaximumSize(QtCore.QSize(16777215, 100))
 		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
@@ -397,7 +405,7 @@ class LinkClipboardUnion(TextClipboardUnion):
 		self.text.setText(self._text)
 		self.set_application_icon()
 
-	def _create_standard_clipboard_union(self):
+	def _create_standard_clipboard_union(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 100))
 		self.setMaximumSize(QtCore.QSize(16777215, 100))
 		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
@@ -482,7 +490,7 @@ class ClipboardUnionFactory:
 
 		self._clipboard.dataChanged.connect(self.create_clipboard_union)
 
-	def create_clipboard_union(self):
+	def create_clipboard_union(self) -> None:
 		file_urls, image, text = self._get_data_from_clipboard()
 
 		if text in self._data or image in self._data or file_urls in self._data:
@@ -518,7 +526,7 @@ class ClipboardUnionFactory:
 			else:
 				raise TypeError('Now supports only text, image and files')
 
-	def _create_clipboard_union(self, parent: QtWidgets.QWidget, union_class: type(ClipboardUnion)):
+	def _create_clipboard_union(self, parent: QtWidgets.QWidget, union_class: type(ClipboardUnion)) -> None:
 		"""
 		:param parent:
 		:param union_class: link to class that you want to create
@@ -529,10 +537,11 @@ class ClipboardUnionFactory:
 		layout.insertWidget(0, union)
 		self._append_unions_to_all_unions(union)
 
-	def _append_unions_to_all_unions(self, union: ClipboardUnion):
+	def _append_unions_to_all_unions(self, union: ClipboardUnion) -> None:
 		self._parent_window.all_unions.add(union)
 
-	def _get_data_from_clipboard(self):
+	def _get_data_from_clipboard(self) -> (list[str], QtGui.QImage, str):
+		"""gets all data, that can be copied from clipboard"""
 		text = self._clipboard.text()
 		image = self._clipboard.image()
 		file_urls = [x.path() for x in self._clipboard.mimeData().urls()]

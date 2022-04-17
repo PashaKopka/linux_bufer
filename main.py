@@ -85,7 +85,7 @@ class MainWindow(QtWidgets.QWidget):
 		# activate search
 		self.ui.searchbar.textChanged.connect(self._search_unions)
 
-	def show_window(self):
+	def show_window(self) -> None:
 		"""
 		function of window showing
 		if you want to make window.show() use this function
@@ -95,17 +95,17 @@ class MainWindow(QtWidgets.QWidget):
 		self.show()
 		self.activateWindow()
 
-	def hide_window(self):
+	def hide_window(self) -> None:
 		self.hide()
 
-	def _activate_shortcuts(self):
+	def _activate_shortcuts(self) -> None:
 		"""
 		create and activate users shortcuts listeners
 		"""
 		for hotkey, function in self.shortcuts.items():
 			ShortCutFactory(hotkey, function)
 
-	def _setup_window(self):
+	def _setup_window(self) -> None:
 		"""
 		setup standard main window settings
 		"""
@@ -114,7 +114,11 @@ class MainWindow(QtWidgets.QWidget):
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
-	def _search_unions(self, text):
+	def _search_unions(self, text: str) -> None:
+		"""
+		function for searching unions
+		just show widget if it has text, that user typed in self.ui.searchbar
+		"""
 		for union in self.all_unions:
 			if union.has_text(text):
 				union.show()
