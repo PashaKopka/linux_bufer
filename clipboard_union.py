@@ -105,7 +105,7 @@ class TextClipboardUnion(ClipboardUnion):
 		function using for searching for unions
 		if union has text, that user typed, inside -> return True
 		"""
-		if text.lower() in self.text.text():
+		if text.lower() in self.text.text().lower():
 			return True
 		return False
 

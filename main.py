@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
-from clipboard_union import ClipboardUnionFactory
+from clipboard_union import ClipboardUnionFactory, ClipboardUnion
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
 
@@ -58,7 +58,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.shortcuts = {
 			'<cmd>+v': self.show_window,
 		}
-		self.all_unions: set[QtWidgets.QPushButton] = set()
+		self.all_unions: set[ClipboardUnion] = set()
 
 		# set window parameters
 		self._setup_window()
