@@ -59,7 +59,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.shortcuts = {
 			ACTIVATE_HOTKEY: self.show_window,
 		}
-		self.all_unions: set[QtWidgets.QPushButton] = set()
+		self.all_unions: set[ClipboardUnion] = set()
 
 		# set window parameters
 		self._setup_window()
