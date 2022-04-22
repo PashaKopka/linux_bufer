@@ -1,7 +1,7 @@
 # CleverClip
 
 ### Useful commands
-    $ pyuic5 interface/main.ui > ui/main.py
+    $ pyuic5 interface/new_main.ui > ui/main.py
     $ i686-w64-mingw32-gcc-win32
     $ c++ -O3 -Wall -shared -std=c++11 -fPIC $(python3 -m pybind11 --includes) utils.cpp -o utils$(python3-config --extension-suffix)
     $ c++ -O3 -Wall -shared -std=c++11 -fPIC $(python3 -m pybind11 --includes) utils.cpp -o utils$(python3-config --extension-suffix) `pkg-config --cflags --libs gtk+-3.0`
