@@ -69,10 +69,10 @@ class MainWindow(QtWidgets.QWidget):
 		# layouts links
 		self._layouts = {
 			'all_unions': self.ui.all_unions_scrollarea_content,
-			'text': self.ui.text_scrollarea_content,
-			'image': self.ui.images_scrollarea_content,
-			'file': self.ui.files_scrollarea_content,
-			'link': self.ui.links_scrollarea_content
+			'text': self.ui.text_unions_scrollarea_content,
+			'image': self.ui.images_unions_scrollarea_content,
+			'file': self.ui.text_unions_scrollarea_content,
+			'link': self.ui.links_unions_scrollarea_content
 		}
 		# activate clipboard handler and clipboard unions factory
 		self._clipboard = QtWidgets.QApplication.clipboard()
@@ -113,6 +113,10 @@ class MainWindow(QtWidgets.QWidget):
 		flags |= Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
+
+		# box-shadow effect for tab names
+		# effect = QtWidgets.QGraphicsDropShadowEffect()
+		# self.ui.tabWidget.tabBar().setGraphicsEffect(effect)
 
 	def _search_unions(self, text: str) -> None:
 		"""
