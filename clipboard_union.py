@@ -54,7 +54,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		# format that equals to GdkPixbuf
 		image = QtGui.QImage(image_binary_data, 32, 32, QtGui.QImage.Format.Format_RGBA8888)
 		icon_pixmap = QtGui.QPixmap().fromImage(image)
-		self.logo.setPixmap(icon_pixmap)
+		self.application_ico.setPixmap(icon_pixmap)
 
 	@abc.abstractmethod
 	def has_text(self, text: str) -> bool:
@@ -111,78 +111,138 @@ class TextClipboardUnion(ClipboardUnion):
 			return True
 		return False
 
+	def get_text(self):
+		"""refactor text"""
+		return self._text.replace('\t', '    ')
+
 	def _create_widget(self) -> None:
 		"""normalize union: sets standard styles, sets showing text or image"""
 		self._create_standard_clipboard_union()
-		self.text.setText(self._text.replace('\t', '    '))
+		self.text.setText(self.get_text())
 		self.set_application_icon()
 
 	def _create_standard_clipboard_union(self) -> None:
-		self.setMinimumSize(QtCore.QSize(0, 100))
-		self.setMaximumSize(QtCore.QSize(16777215, 100))
-		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+		self.setMinimumSize(QtCore.QSize(0, 132))
+		self.setMaximumSize(QtCore.QSize(16777215, 132))
+		self.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
+		self.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.setStyleSheet(
 			"QPushButton{\n"
-			"    border: 2px solid #313131;\n"
-			"    color: #fff;\n"
-			"    border-radius: 10px;\n"
-			"    background-color: #414141;\n"
-			"    text-align:left top;\n"
-			"    padding: 21px 70px 21px 20px;\n"
-			"}\n"
-			"\n"
-			"QPushButton:hover{\n"
-			"    border: 2px solid #08ffc8;\n"
-			"}\n"
-			"\n"
-			"QPushButton:pressed{\n"
-			"    background-color: #313131;\n"
-			"    border: 2px solid #08ffc8;\n"
+			"	background-color: #585B64;\n"
+			"	border-radius: 5px;\n"
 			"}"
-		)
+			"QPushButton:hover{\n"
+			"	border: 2px solid #FD7013;\n"
+			"}")
 
-		self.horizontal_layout = QtWidgets.QHBoxLayout(self)
-		self.horizontal_layout.setContentsMargins(0, 0, 0, 0)
+		self.vertical_layout = QtWidgets.QVBoxLayout(self)
+		self.vertical_layout.setContentsMargins(0, 0, 0, 0)
+		self.vertical_layout.setSpacing(0)
 
-		self.props = QtWidgets.QWidget(self)
-		self.props.setMinimumSize(QtCore.QSize(62, 0))
-		self.props.setMaximumSize(QtCore.QSize(40, 16777215))
-		self.props.setStyleSheet("margin: 0px 10px 0 0;")
+		self.union_info = QtWidgets.QWidget(self)
+		self.union_info.setMinimumSize(QtCore.QSize(0, 25))
+		self.union_info.setMaximumSize(QtCore.QSize(16777215, 25))
 
-		self.verticalLayout = QtWidgets.QVBoxLayout(self.props)
-		self.verticalLayout.setContentsMargins(0, 7, 0, 10)
-		self.verticalLayout.setSpacing(0)
+		font = QtGui.QFont()
+		font.setPointSize(8)
+		self.union_info.setFont(font)
 
-		self.datetime = QtWidgets.QLabel(self.props)
-		self.font = QtGui.QFont()
-		self.font.setPointSize(9)
-		self.datetime.setFont(self.font)
-		self.datetime.setStyleSheet("color: #fff;")
-		self.datetime.setAlignment(QtCore.Qt.AlignCenter)
+		self.union_info_layout = QtWidgets.QHBoxLayout(self.union_info)
+		self.union_info_layout.setContentsMargins(0, 0, 7, 0)
+		self.union_info_layout.setSpacing(0)
+
+		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
+		self.union_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
+		self.union_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
+		self.union_info_text_ico_label.setText("")
+		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/text-icon.svg"))
+
+		self.union_info_layout.addWidget(self.union_info_text_ico_label)
+		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
+
+		font = QtGui.QFont()
+		font.setFamily("Roboto")
+		font.setBold(False)
+		font.setWeight(50)
+
+		self.union_info_text_ico_label.setFont(font)
+		self.union_info_text_ico_label.setStyleSheet("color: #FFFFFF;")
+		self.union_info_text_ico_label.setText('Text')
+
+		self.union_info_layout.addWidget(self.union_info_text_ico_label)
+
+		spacer_item = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+		self.union_info_layout.addItem(spacer_item)
+
+		self.datetime_label = QtWidgets.QLabel(self.union_info)
+		font = QtGui.QFont()
+		font.setFamily("Roboto")
+		font.setPointSize(10)
+		self.datetime_label.setFont(font)
+		self.datetime_label.setStyleSheet("color: #FFFFFF;")
 		time_string = time.strftime('%H:%M', time.localtime())
-		self.datetime.setText(time_string)
+		self.datetime_label.setText(time_string)
 
-		self.verticalLayout.addWidget(self.datetime)
+		self.union_info_layout.addWidget(self.datetime_label)
+		self.vertical_layout.addWidget(self.union_info)
 
-		self.logo = QtWidgets.QLabel(self.props)
-		self.logo.setMinimumSize(QtCore.QSize(32, 32))
-		self.logo.setAlignment(QtCore.Qt.AlignCenter)
-		self.logo.setText("")
+		self.line = QtWidgets.QFrame(self)
+		self.line.setMinimumSize(QtCore.QSize(290, 3))
+		self.line.setMaximumSize(QtCore.QSize(290, 3))
+		self.line.setStyleSheet(
+			"background-color: #EEEEEE;\n"
+			"border-radius: 1px;")
+		self.line.setFrameShape(QtWidgets.QFrame.HLine)
+		self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+		self.vertical_layout.addWidget(self.line)
 
-		self.verticalLayout.addWidget(self.logo)
-		self.horizontal_layout.addWidget(self.props)
+		self.union_data = QtWidgets.QWidget(self)
 
-		self.text = QtWidgets.QLabel(self)
-		self.text.setMinimumSize(QtCore.QSize(150, 100))
-		self.text.setStyleSheet(
-			"color: #fff;\n"
-			"text-align:left top;\n"
-			"padding: 22px 20px 22px 10px;"
-		)
+		self.main_text_layout = QtWidgets.QHBoxLayout(self.union_data)
+		self.main_text_layout.setContentsMargins(6, 6, 6, 6)
+		self.main_text_layout.setSpacing(5)
+
+		self.text = QtWidgets.QLabel(self.union_data)
+		font = QtGui.QFont()
+		font.setFamily("DejaVu Sans")
+		font.setPointSize(12)
+		self.text.setFont(font)
+		self.text.setStyleSheet("color: #FFFFFF;")
 		self.text.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
-		self.text.setWordWrap(True)
+		# self.text.setWordWrap(True)
+		self.text.setObjectName("text")
+		self.main_text_layout.addWidget(self.text)
 
-		self.horizontal_layout.insertWidget(0, self.text)
+		self.props_layout = QtWidgets.QVBoxLayout()
+		self.props_layout.setContentsMargins(9, -1, 9, -1)
+		self.props_layout.setSpacing(10)
+		self.props_layout.setObjectName("props")
+
+		self.application_ico = QtWidgets.QLabel(self.union_data)
+		self.application_ico.setMinimumSize(QtCore.QSize(32, 32))
+		self.application_ico.setMaximumSize(QtCore.QSize(32, 32))
+		self.application_ico.setText("")
+		# self.application_ico.setPixmap(QtGui.QPixmap("interface/../../../../Downloads/Hnet.com-image.png"))
+		self.props_layout.addWidget(self.application_ico)
+
+		self.props_button = QtWidgets.QPushButton(self.union_data)
+		self.props_button.setMinimumSize(QtCore.QSize(32, 32))
+		self.props_button.setMaximumSize(QtCore.QSize(32, 32))
+		self.props_button.setStyleSheet(
+			"border-radius: 8px;/*\n"
+			"background-color: #4C4F57;*/\n"
+			"padding: 0;\n"
+			"margin: 0;\n"
+			"background: transparent;")
+		self.props_button.setText("")
+		icon = QtGui.QIcon()
+		icon.addPixmap(QtGui.QPixmap("interface/../sources/images/props-ico.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		self.props_button.setIcon(icon)
+		self.props_button.setIconSize(QtCore.QSize(32, 32))
+		self.props_layout.addWidget(self.props_button)
+
+		self.main_text_layout.addLayout(self.props_layout)
+		self.vertical_layout.addWidget(self.union_data)
 
 
 class ImageClipboardUnion(ClipboardUnion):

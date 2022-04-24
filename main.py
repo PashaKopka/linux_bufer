@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
@@ -110,14 +110,19 @@ class MainWindow(QtWidgets.QWidget):
 		"""
 		setup standard main window settings
 		"""
+		# general window settings
 		flags = Qt.FramelessWindowHint
 		flags |= Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
-		# box-shadow effect for tab names
-		# effect = QtWidgets.QGraphicsDropShadowEffect()
-		# self.ui.tabWidget.tabBar().setGraphicsEffect(effect)
+		# set shadow effect for tabs
+		grey_shadow_effect = QtWidgets.QGraphicsDropShadowEffect()
+		grey_shadow_effect.setBlurRadius(7)
+		grey_shadow_effect.setColor(QtGui.QColor(88, 91, 100, 120))
+		grey_shadow_effect.setXOffset(0)
+		grey_shadow_effect.setYOffset(4)
+		self.ui.tabWidget.tabBar().setGraphicsEffect(grey_shadow_effect)
 
 	def _search_unions(self, text: str) -> None:
 		"""
