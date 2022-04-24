@@ -21,7 +21,7 @@
 
 ### TODO
 
-- [ ] change ui framework
+- [ ] create orange shadow effect for current tab button
 - [ ] context menus for unions:
   - [ ] image: save image, edit image
   - [ ] link: open in browser
