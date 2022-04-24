@@ -195,6 +195,7 @@ class TextClipboardUnion(ClipboardUnion):
 		self.line.setFrameShape(QtWidgets.QFrame.HLine)
 		self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
 		self.vertical_layout.addWidget(self.line)
+		self.vertical_layout.setAlignment(self.line, QtCore.Qt.AlignCenter)
 
 		self.union_data = QtWidgets.QWidget(self)
 

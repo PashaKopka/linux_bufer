@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
-from clipboard_union import ClipboardUnionFactory
+from clipboard_union import ClipboardUnionFactory, ClipboardUnion
 from config import ACTIVATE_HOTKEY
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
