@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
 from clipboard_union import ClipboardUnionFactory
+from config import ACTIVATE_HOTKEY
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
 
@@ -56,7 +57,7 @@ class MainWindow(QtWidgets.QWidget):
 
 		# create some variables
 		self.shortcuts = {
-			'<cmd>+v': self.show_window,
+			ACTIVATE_HOTKEY: self.show_window,
 		}
 		self.all_unions: set[QtWidgets.QPushButton] = set()
 

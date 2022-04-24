@@ -5,6 +5,8 @@ import validators
 from PyQt5 import QtWidgets, QtCore, QtGui
 from pynput import keyboard
 
+from config import HIDING_TIME
+
 
 class ClipboardUnion(QtWidgets.QPushButton):
 	# can`t use AbstractClipboardUnion(ABC)
@@ -22,7 +24,7 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		self.update_clipboard()
 
 		keyboard_controller = keyboard.Controller()
-		time.sleep(.01)  # Time to window hiding
+		time.sleep(HIDING_TIME)  # Time to window hiding
 
 		# emulate <Ctrl>+V pressing
 		with keyboard_controller.pressed(keyboard.Key.ctrl):
