@@ -211,13 +211,11 @@ class TextClipboardUnion(ClipboardUnion):
 		self.text.setStyleSheet("color: #FFFFFF;")
 		self.text.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
 		# self.text.setWordWrap(True)
-		self.text.setObjectName("text")
 		self.main_text_layout.addWidget(self.text)
 
 		self.props_layout = QtWidgets.QVBoxLayout()
 		self.props_layout.setContentsMargins(9, -1, 9, -1)
 		self.props_layout.setSpacing(10)
-		self.props_layout.setObjectName("props")
 
 		self.application_ico = QtWidgets.QLabel(self.union_data)
 		self.application_ico.setMinimumSize(QtCore.QSize(32, 32))
@@ -246,7 +244,7 @@ class TextClipboardUnion(ClipboardUnion):
 		self.vertical_layout.addWidget(self.union_data)
 
 
-class ImageClipboardUnion(ClipboardUnion):
+class StandardImageClipboardUnion(ClipboardUnion):
 	"""Image clipboard union if user copied image or make screenshot"""
 
 	def __init__(
@@ -284,60 +282,97 @@ class ImageClipboardUnion(ClipboardUnion):
 		# set icon
 		size = QtCore.QSize(262, 160)
 		self._pixel_map = self._pixel_map.scaled(size, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
-		self.image.setMinimumSize(size.width(), size.height())
-		self.image.setMaximumSize(size.width(), size.height())
+		# self.image.setMinimumSize(size.width(), size.height())
+		# self.image.setMaximumSize(size.width(), size.height())
 		self.image.setPixmap(self._pixel_map)
 
 	def _create_standard_clipboard_union(self) -> None:
-		self.setEnabled(True)
-		self.setMinimumSize(QtCore.QSize(139, 200))
-		self.setMaximumSize(QtCore.QSize(280, 200))
-		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+		self.setMinimumSize(QtCore.QSize(0, 132))
+		self.setMaximumSize(QtCore.QSize(16777215, 132))
+		self.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.setStyleSheet(
 			"QPushButton{\n"
-			"    border: 2px solid #313131;\n"
-			"    color: #fff;\n"
-			"    border-radius: 10px;\n"
-			"    background-color: #414141;\n"
-			"}\n"
-			"\n"
+			"	background-color: #585B64;\n"
+			"	border-radius: 5px;\n"
+			"}"
 			"QPushButton:hover{\n"
-			"    border: 2px solid #08ffc8;\n"
-			"}\n"
-			"\n"
-			"QPushButton:pressed{\n"
-			"    background-color: #313131;\n"
-			"    border: 2px solid #08ffc8;\n"
+			"	border: 2px solid #FD7013;\n"
 			"}")
 
-		self.verticalLayout = QtWidgets.QVBoxLayout(self)
-		self.verticalLayout.setContentsMargins(9, 9, 9, 9)
-		self.verticalLayout.setSpacing(6)
+		self.vertical_layout = QtWidgets.QVBoxLayout(self)
+		self.vertical_layout.setContentsMargins(0, 0, 0, 0)
+		self.vertical_layout.setSpacing(0)
 
-		self.datetime = QtWidgets.QLabel(self)
-		self.datetime.setMaximumSize(QtCore.QSize(16777215, 10))
+		self.union_info = QtWidgets.QWidget(self)
+		self.union_info.setMinimumSize(QtCore.QSize(0, 25))
+		self.union_info.setMaximumSize(QtCore.QSize(16777215, 25))
 		font = QtGui.QFont()
-		font.setPointSize(9)
-		self.datetime.setFont(font)
-		self.datetime.setStyleSheet("color: #fff;")
-		self.datetime.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+		font.setPointSize(8)
+		self.union_info.setFont(font)
+
+		self.union_info_layout = QtWidgets.QHBoxLayout(self.union_info)
+		self.union_info_layout.setContentsMargins(0, 0, 7, 0)
+		self.union_info_layout.setSpacing(0)
+
+		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
+		self.union_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
+		self.union_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
+		self.union_info_text_ico_label.setText("")
+		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/image-ico.svg"))
+
+		self.union_info_layout.addWidget(self.union_info_text_ico_label)
+		self.union_info_text_label = QtWidgets.QLabel(self.union_info)
+
+		font = QtGui.QFont()
+		font.setFamily("Roboto")
+		font.setBold(False)
+		font.setWeight(50)
+		self.union_info_text_label.setFont(font)
+		self.union_info_text_label.setStyleSheet("color: #FFFFFF;")
+		self.union_info_text_label.setText('Image')
+
+		self.union_info_layout.addWidget(self.union_info_text_label)
+
+		spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+		self.union_info_layout.addItem(spacerItem2)
+
+		self.datetime_label = QtWidgets.QLabel(self.union_info)
+		font = QtGui.QFont()
+		font.setFamily("Roboto")
+		font.setPointSize(10)
+		self.datetime_label.setFont(font)
+		self.datetime_label.setStyleSheet("color: #FFFFFF;")
 		time_string = time.strftime('%H:%M', time.localtime())
-		self.datetime.setText(time_string)
+		self.datetime_label.setText(time_string)
 
-		self.verticalLayout.addWidget(self.datetime)
+		self.union_info_layout.addWidget(self.datetime_label)
+		self.vertical_layout.addWidget(self.union_info)
 
-		self.image = QtWidgets.QLabel(self)
-		self.image.setMinimumSize(QtCore.QSize(0, 0))
-		self.image.setStyleSheet(
-			"color: #fff;\n"
-			"text-align: center;\n")
+		self.line = QtWidgets.QFrame(self)
+		self.line.setMinimumSize(QtCore.QSize(290, 3))
+		self.line.setMaximumSize(QtCore.QSize(290, 3))
+		self.line.setStyleSheet(
+			"background-color: #EEEEEE;\n"
+			"border-radius: 1px;")
+		self.line.setFrameShape(QtWidgets.QFrame.HLine)
+		self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+		self.vertical_layout.addWidget(self.line)
+		self.vertical_layout.setAlignment(self.line, QtCore.Qt.AlignCenter)
+
+		self.union_data = QtWidgets.QWidget(self)
+
+		self.main_text_layout = QtWidgets.QHBoxLayout(self.union_data)
+		self.main_text_layout.setContentsMargins(6, 6, 6, 6)
+		self.main_text_layout.setSpacing(5)
+
+		self.image = QtWidgets.QLabel(self.union_data)
+		self.image.setMinimumSize(QtCore.QSize(0, 92))
+		self.image.setMaximumSize(QtCore.QSize(16777215, 16777215))
 		self.image.setText("")
 		self.image.setAlignment(QtCore.Qt.AlignCenter)
-		self.image.setWordWrap(True)
 
-		self.verticalLayout.addWidget(self.image)
-		spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
-		self.verticalLayout.addItem(spacerItem)
+		self.main_text_layout.addWidget(self.image)
+		self.vertical_layout.addWidget(self.union_data)
 
 
 class FileClipboardUnion(ClipboardUnion):
@@ -571,8 +606,8 @@ class ClipboardUnionFactory:
 			elif not self._clipboard.pixmap().isNull():
 				# if copied data is image
 				self._data.append(image)
-				self._create_clipboard_union(self._layouts['all_unions'], ImageClipboardUnion)
-				self._create_clipboard_union(self._layouts['image'], ImageClipboardUnion)
+				self._create_clipboard_union(self._layouts['all_unions'], StandardImageClipboardUnion)
+				self._create_clipboard_union(self._layouts['image'], StandardImageClipboardUnion)
 
 			elif text:
 				if validators.url(text):
