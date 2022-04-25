@@ -8,8 +8,8 @@ from pynput import keyboard
 from config import HIDING_TIME
 
 
-class ClipboardUnion(QtWidgets.QPushButton):
-	# can`t use AbstractClipboardUnion(ABC)
+class ClipboardUnit(QtWidgets.QPushButton):
+	# can`t use AbstractClipboardUnit(ABC)
 
 	def __init__(self, parent: QtWidgets.QWidget):
 		super().__init__(parent)
@@ -58,12 +58,12 @@ class ClipboardUnion(QtWidgets.QPushButton):
 
 	@abc.abstractmethod
 	def has_text(self, text: str) -> bool:
-		"""it is function to check if union has text inside"""
+		"""it is function to check if unit has text inside"""
 		pass
 
 	@abc.abstractmethod
 	def update_clipboard(self) -> None:
-		"""if user choose union then union should set self.data clipboard"""
+		"""if user choose unit then unit should set self.data clipboard"""
 		pass
 
 	@abc.abstractmethod
@@ -72,12 +72,12 @@ class ClipboardUnion(QtWidgets.QPushButton):
 		pass
 
 	@abc.abstractmethod
-	def _create_standard_clipboard_union(self) -> None:
+	def _create_standard_clipboard_unit(self) -> None:
 		"""all widgets should create own styles, or copy realisation from parent"""
 		pass
 
 
-class TextClipboardUnion(ClipboardUnion):
+class TextClipboardUnit(ClipboardUnit):
 
 	def __init__(
 			self,
@@ -104,8 +104,8 @@ class TextClipboardUnion(ClipboardUnion):
 
 	def has_text(self, text: str) -> bool:
 		"""
-		function using for searching for unions
-		if union has text, that user typed, inside -> return True
+		function using for searching for units
+		if unit has text, that user typed, inside -> return True
 		"""
 		if text.lower() in self.text.text().lower():
 			return True
@@ -116,12 +116,12 @@ class TextClipboardUnion(ClipboardUnion):
 		return self._text.replace('\t', '    ')
 
 	def _create_widget(self) -> None:
-		"""normalize union: sets standard styles, sets showing text or image"""
-		self._create_standard_clipboard_union()
+		"""normalize unit: sets standard styles, sets showing text or image"""
+		self._create_standard_clipboard_unit()
 		self.text.setText(self.get_text())
 		self.set_application_icon()
 
-	def _create_standard_clipboard_union(self) -> None:
+	def _create_standard_clipboard_unit(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 132))
 		self.setMaximumSize(QtCore.QSize(16777215, 132))
 		self.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
@@ -139,42 +139,42 @@ class TextClipboardUnion(ClipboardUnion):
 		self.vertical_layout.setContentsMargins(0, 0, 0, 0)
 		self.vertical_layout.setSpacing(0)
 
-		self.union_info = QtWidgets.QWidget(self)
-		self.union_info.setMinimumSize(QtCore.QSize(0, 25))
-		self.union_info.setMaximumSize(QtCore.QSize(16777215, 25))
+		self.unit_info = QtWidgets.QWidget(self)
+		self.unit_info.setMinimumSize(QtCore.QSize(0, 25))
+		self.unit_info.setMaximumSize(QtCore.QSize(16777215, 25))
 
 		font = QtGui.QFont()
 		font.setPointSize(8)
-		self.union_info.setFont(font)
+		self.unit_info.setFont(font)
 
-		self.union_info_layout = QtWidgets.QHBoxLayout(self.union_info)
-		self.union_info_layout.setContentsMargins(2, 0, 9, 0)
-		self.union_info_layout.setSpacing(0)
+		self.unit_info_layout = QtWidgets.QHBoxLayout(self.unit_info)
+		self.unit_info_layout.setContentsMargins(2, 0, 9, 0)
+		self.unit_info_layout.setSpacing(0)
 
-		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
-		self.union_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setText("")
-		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/text-icon.svg"))
+		self.unit_info_text_ico_label = QtWidgets.QLabel(self.unit_info)
+		self.unit_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setText("")
+		self.unit_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/text-icon.svg"))
 
-		self.union_info_layout.addWidget(self.union_info_text_ico_label)
-		self.union_info_text_label = QtWidgets.QLabel(self.union_info)
+		self.unit_info_layout.addWidget(self.unit_info_text_ico_label)
+		self.unit_info_text_label = QtWidgets.QLabel(self.unit_info)
 
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setBold(False)
 		font.setWeight(50)
 
-		self.union_info_text_label.setFont(font)
-		self.union_info_text_label.setStyleSheet("color: #FFFFFF;")
-		self.union_info_text_label.setText('Text')
+		self.unit_info_text_label.setFont(font)
+		self.unit_info_text_label.setStyleSheet("color: #FFFFFF;")
+		self.unit_info_text_label.setText('Text')
 
-		self.union_info_layout.addWidget(self.union_info_text_label)
+		self.unit_info_layout.addWidget(self.unit_info_text_label)
 
 		spacer_item = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-		self.union_info_layout.addItem(spacer_item)
+		self.unit_info_layout.addItem(spacer_item)
 
-		self.datetime_label = QtWidgets.QLabel(self.union_info)
+		self.datetime_label = QtWidgets.QLabel(self.unit_info)
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setPointSize(10)
@@ -183,8 +183,8 @@ class TextClipboardUnion(ClipboardUnion):
 		time_string = time.strftime('%H:%M', time.localtime())
 		self.datetime_label.setText(time_string)
 
-		self.union_info_layout.addWidget(self.datetime_label)
-		self.vertical_layout.addWidget(self.union_info)
+		self.unit_info_layout.addWidget(self.datetime_label)
+		self.vertical_layout.addWidget(self.unit_info)
 
 		self.line = QtWidgets.QFrame(self)
 		self.line.setMinimumSize(QtCore.QSize(290, 3))
@@ -197,13 +197,13 @@ class TextClipboardUnion(ClipboardUnion):
 		self.vertical_layout.addWidget(self.line)
 		self.vertical_layout.setAlignment(self.line, QtCore.Qt.AlignCenter)
 
-		self.union_data = QtWidgets.QWidget(self)
+		self.unit_data = QtWidgets.QWidget(self)
 
-		self.main_text_layout = QtWidgets.QHBoxLayout(self.union_data)
+		self.main_text_layout = QtWidgets.QHBoxLayout(self.unit_data)
 		self.main_text_layout.setContentsMargins(6, 6, 6, 6)
 		self.main_text_layout.setSpacing(5)
 
-		self.text = QtWidgets.QLabel(self.union_data)
+		self.text = QtWidgets.QLabel(self.unit_data)
 		font = QtGui.QFont()
 		font.setFamily("DejaVu Sans")
 		font.setPointSize(12)
@@ -218,14 +218,14 @@ class TextClipboardUnion(ClipboardUnion):
 		self.props_layout.setContentsMargins(9, -1, 9, -1)
 		self.props_layout.setSpacing(10)
 
-		self.application_ico = QtWidgets.QLabel(self.union_data)
+		self.application_ico = QtWidgets.QLabel(self.unit_data)
 		self.application_ico.setMinimumSize(QtCore.QSize(32, 32))
 		self.application_ico.setMaximumSize(QtCore.QSize(32, 32))
 		self.application_ico.setText("")
 		# self.application_ico.setPixmap(QtGui.QPixmap("interface/../../../../Downloads/Hnet.com-image.png"))
 		self.props_layout.addWidget(self.application_ico)
 
-		self.props_button = QtWidgets.QPushButton(self.union_data)
+		self.props_button = QtWidgets.QPushButton(self.unit_data)
 		self.props_button.setMinimumSize(QtCore.QSize(32, 32))
 		self.props_button.setMaximumSize(QtCore.QSize(32, 32))
 		self.props_button.setStyleSheet(
@@ -242,11 +242,11 @@ class TextClipboardUnion(ClipboardUnion):
 		self.props_layout.addWidget(self.props_button)
 
 		self.main_text_layout.addLayout(self.props_layout)
-		self.vertical_layout.addWidget(self.union_data)
+		self.vertical_layout.addWidget(self.unit_data)
 
 
-class StandardImageClipboardUnion(ClipboardUnion):
-	"""Image clipboard union if user copied image or make screenshot"""
+class StandardImageClipboardUnit(ClipboardUnit):
+	"""Image clipboard unit if user copied image or make screenshot"""
 
 	def __init__(
 			self,
@@ -278,14 +278,14 @@ class StandardImageClipboardUnion(ClipboardUnion):
 
 	def _create_widget(self) -> None:
 		# TODO add function of saving image
-		self._create_standard_clipboard_union()
+		self._create_standard_clipboard_unit()
 
 		# set icon
 		size = QtCore.QSize(262, 160)
 		pixel_map = self._pixel_map.scaled(size, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
 		self.image.setPixmap(pixel_map)
 
-	def _create_standard_clipboard_union(self) -> None:
+	def _create_standard_clipboard_unit(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 132))
 		self.setMaximumSize(QtCore.QSize(16777215, 132))
 		self.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -302,40 +302,40 @@ class StandardImageClipboardUnion(ClipboardUnion):
 		self.vertical_layout.setContentsMargins(0, 0, 0, 0)
 		self.vertical_layout.setSpacing(0)
 
-		self.union_info = QtWidgets.QWidget(self)
-		self.union_info.setMinimumSize(QtCore.QSize(0, 25))
-		self.union_info.setMaximumSize(QtCore.QSize(16777215, 25))
+		self.unit_info = QtWidgets.QWidget(self)
+		self.unit_info.setMinimumSize(QtCore.QSize(0, 25))
+		self.unit_info.setMaximumSize(QtCore.QSize(16777215, 25))
 		font = QtGui.QFont()
 		font.setPointSize(8)
-		self.union_info.setFont(font)
+		self.unit_info.setFont(font)
 
-		self.union_info_layout = QtWidgets.QHBoxLayout(self.union_info)
-		self.union_info_layout.setContentsMargins(2, 0, 9, 0)
-		self.union_info_layout.setSpacing(0)
+		self.unit_info_layout = QtWidgets.QHBoxLayout(self.unit_info)
+		self.unit_info_layout.setContentsMargins(2, 0, 9, 0)
+		self.unit_info_layout.setSpacing(0)
 
-		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
-		self.union_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setText("")
-		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/image-ico.svg"))
+		self.unit_info_text_ico_label = QtWidgets.QLabel(self.unit_info)
+		self.unit_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setText("")
+		self.unit_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/image-ico.svg"))
 
-		self.union_info_layout.addWidget(self.union_info_text_ico_label)
-		self.union_info_text_label = QtWidgets.QLabel(self.union_info)
+		self.unit_info_layout.addWidget(self.unit_info_text_ico_label)
+		self.unit_info_text_label = QtWidgets.QLabel(self.unit_info)
 
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setBold(False)
 		font.setWeight(50)
-		self.union_info_text_label.setFont(font)
-		self.union_info_text_label.setStyleSheet("color: #FFFFFF;")
-		self.union_info_text_label.setText('Image')
+		self.unit_info_text_label.setFont(font)
+		self.unit_info_text_label.setStyleSheet("color: #FFFFFF;")
+		self.unit_info_text_label.setText('Image')
 
-		self.union_info_layout.addWidget(self.union_info_text_label)
+		self.unit_info_layout.addWidget(self.unit_info_text_label)
 
 		spacer_item = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-		self.union_info_layout.addItem(spacer_item)
+		self.unit_info_layout.addItem(spacer_item)
 
-		self.datetime_label = QtWidgets.QLabel(self.union_info)
+		self.datetime_label = QtWidgets.QLabel(self.unit_info)
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setPointSize(10)
@@ -344,8 +344,8 @@ class StandardImageClipboardUnion(ClipboardUnion):
 		time_string = time.strftime('%H:%M', time.localtime())
 		self.datetime_label.setText(time_string)
 
-		self.union_info_layout.addWidget(self.datetime_label)
-		self.vertical_layout.addWidget(self.union_info)
+		self.unit_info_layout.addWidget(self.datetime_label)
+		self.vertical_layout.addWidget(self.unit_info)
 
 		self.line = QtWidgets.QFrame(self)
 		self.line.setMinimumSize(QtCore.QSize(290, 3))
@@ -358,23 +358,23 @@ class StandardImageClipboardUnion(ClipboardUnion):
 		self.vertical_layout.addWidget(self.line)
 		self.vertical_layout.setAlignment(self.line, QtCore.Qt.AlignCenter)
 
-		self.union_data = QtWidgets.QWidget(self)
+		self.unit_data = QtWidgets.QWidget(self)
 
-		self.main_text_layout = QtWidgets.QHBoxLayout(self.union_data)
+		self.main_text_layout = QtWidgets.QHBoxLayout(self.unit_data)
 		self.main_text_layout.setContentsMargins(6, 6, 6, 6)
 		self.main_text_layout.setSpacing(5)
 
-		self.image = QtWidgets.QLabel(self.union_data)
+		self.image = QtWidgets.QLabel(self.unit_data)
 		self.image.setMinimumSize(QtCore.QSize(0, 92))
 		self.image.setMaximumSize(QtCore.QSize(16777215, 16777215))
 		self.image.setText("")
 		self.image.setAlignment(QtCore.Qt.AlignCenter)
 
 		self.main_text_layout.addWidget(self.image)
-		self.vertical_layout.addWidget(self.union_data)
+		self.vertical_layout.addWidget(self.unit_data)
 
 
-class ImageClipboardUnion(StandardImageClipboardUnion):
+class ImageClipboardUnit(StandardImageClipboardUnit):
 
 	def __init__(
 			self,
@@ -382,10 +382,10 @@ class ImageClipboardUnion(StandardImageClipboardUnion):
 			clipboard: QtGui.QClipboard,
 			parent_window: QtWidgets.QWidget
 	):
-		super(ImageClipboardUnion, self).__init__(parent, clipboard, parent_window)
+		super(ImageClipboardUnit, self).__init__(parent, clipboard, parent_window)
 
-	def _create_standard_clipboard_union(self) -> None:
-		StandardImageClipboardUnion._create_standard_clipboard_union(self)
+	def _create_standard_clipboard_unit(self) -> None:
+		StandardImageClipboardUnit._create_standard_clipboard_unit(self)
 
 		# calculate height for image
 		pixel_map_old_size = self._pixel_map.size()
@@ -401,16 +401,16 @@ class ImageClipboardUnion(StandardImageClipboardUnion):
 		pixel_map = self._pixel_map.scaledToHeight(pixel_map_height)
 		self.image.setPixmap(pixel_map)
 
-		# calculate height of union
+		# calculate height of unit
 		if pixel_map_height + 40 < 300:
-			union_height = pixel_map_height + 40
+			unit_height = pixel_map_height + 40
 		else:
-			union_height = 300
-		self.setFixedSize(QtCore.QSize(16777215, union_height))
+			unit_height = 300
+		self.setFixedSize(QtCore.QSize(16777215, unit_height))
 
 
-class FileClipboardUnion(ClipboardUnion):
-	"""Image clipboard union if user copied file"""
+class FileClipboardUnit(ClipboardUnit):
+	"""Image clipboard unit if user copied file"""
 
 	def __init__(
 			self,
@@ -442,10 +442,10 @@ class FileClipboardUnion(ClipboardUnion):
 
 	def _create_widget(self) -> None:
 		file_names = [x.rsplit('/', 1)[-1] for x in self._files_urls]
-		self._create_standard_clipboard_union()
+		self._create_standard_clipboard_unit()
 		self.text.setText('\n'.join(file_names))
 
-	def _create_standard_clipboard_union(self) -> None:
+	def _create_standard_clipboard_unit(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 132))
 		self.setMaximumSize(QtCore.QSize(16777215, 132))
 		self.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
@@ -463,42 +463,42 @@ class FileClipboardUnion(ClipboardUnion):
 		self.vertical_layout.setContentsMargins(0, 0, 0, 0)
 		self.vertical_layout.setSpacing(0)
 
-		self.union_info = QtWidgets.QWidget(self)
-		self.union_info.setMinimumSize(QtCore.QSize(0, 25))
-		self.union_info.setMaximumSize(QtCore.QSize(16777215, 25))
+		self.unit_info = QtWidgets.QWidget(self)
+		self.unit_info.setMinimumSize(QtCore.QSize(0, 25))
+		self.unit_info.setMaximumSize(QtCore.QSize(16777215, 25))
 
 		font = QtGui.QFont()
 		font.setPointSize(8)
-		self.union_info.setFont(font)
+		self.unit_info.setFont(font)
 
-		self.union_info_layout = QtWidgets.QHBoxLayout(self.union_info)
-		self.union_info_layout.setContentsMargins(2, 0, 9, 0)
-		self.union_info_layout.setSpacing(0)
+		self.unit_info_layout = QtWidgets.QHBoxLayout(self.unit_info)
+		self.unit_info_layout.setContentsMargins(2, 0, 9, 0)
+		self.unit_info_layout.setSpacing(0)
 
-		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
-		self.union_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
-		self.union_info_text_ico_label.setText("")
-		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/file-ico.svg"))
+		self.unit_info_text_ico_label = QtWidgets.QLabel(self.unit_info)
+		self.unit_info_text_ico_label.setMinimumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setMaximumSize(QtCore.QSize(25, 25))
+		self.unit_info_text_ico_label.setText("")
+		self.unit_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/file-ico.svg"))
 
-		self.union_info_layout.addWidget(self.union_info_text_ico_label)
-		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
+		self.unit_info_layout.addWidget(self.unit_info_text_ico_label)
+		self.unit_info_text_ico_label = QtWidgets.QLabel(self.unit_info)
 
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setBold(False)
 		font.setWeight(50)
 
-		self.union_info_text_ico_label.setFont(font)
-		self.union_info_text_ico_label.setStyleSheet("color: #FFFFFF;")
-		self.union_info_text_ico_label.setText('Text')
+		self.unit_info_text_ico_label.setFont(font)
+		self.unit_info_text_ico_label.setStyleSheet("color: #FFFFFF;")
+		self.unit_info_text_ico_label.setText('Text')
 
-		self.union_info_layout.addWidget(self.union_info_text_ico_label)
+		self.unit_info_layout.addWidget(self.unit_info_text_ico_label)
 
 		spacer_item = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-		self.union_info_layout.addItem(spacer_item)
+		self.unit_info_layout.addItem(spacer_item)
 
-		self.datetime_label = QtWidgets.QLabel(self.union_info)
+		self.datetime_label = QtWidgets.QLabel(self.unit_info)
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setPointSize(10)
@@ -507,8 +507,8 @@ class FileClipboardUnion(ClipboardUnion):
 		time_string = time.strftime('%H:%M', time.localtime())
 		self.datetime_label.setText(time_string)
 
-		self.union_info_layout.addWidget(self.datetime_label)
-		self.vertical_layout.addWidget(self.union_info)
+		self.unit_info_layout.addWidget(self.datetime_label)
+		self.vertical_layout.addWidget(self.unit_info)
 
 		self.line = QtWidgets.QFrame(self)
 		self.line.setMinimumSize(QtCore.QSize(290, 3))
@@ -521,13 +521,13 @@ class FileClipboardUnion(ClipboardUnion):
 		self.vertical_layout.addWidget(self.line)
 		self.vertical_layout.setAlignment(self.line, QtCore.Qt.AlignCenter)
 
-		self.union_data = QtWidgets.QWidget(self)
+		self.unit_data = QtWidgets.QWidget(self)
 
-		self.main_text_layout = QtWidgets.QHBoxLayout(self.union_data)
+		self.main_text_layout = QtWidgets.QHBoxLayout(self.unit_data)
 		self.main_text_layout.setContentsMargins(6, 6, 6, 6)
 		self.main_text_layout.setSpacing(5)
 
-		self.text = QtWidgets.QLabel(self.union_data)
+		self.text = QtWidgets.QLabel(self.unit_data)
 		font = QtGui.QFont()
 		font.setFamily("DejaVu Sans")
 		font.setPointSize(12)
@@ -541,14 +541,14 @@ class FileClipboardUnion(ClipboardUnion):
 		self.props_layout.setContentsMargins(9, -1, 9, -1)
 		self.props_layout.setSpacing(10)
 
-		self.open_folder_button = QtWidgets.QLabel(self.union_data)
+		self.open_folder_button = QtWidgets.QLabel(self.unit_data)
 		self.open_folder_button.setMinimumSize(QtCore.QSize(32, 32))
 		self.open_folder_button.setMaximumSize(QtCore.QSize(32, 32))
 		self.open_folder_button.setText("")
 		self.open_folder_button.setPixmap(QtGui.QPixmap("interface/../sources/images/folder-ico.svg"))
 		self.props_layout.addWidget(self.open_folder_button)
 
-		self.props_button = QtWidgets.QPushButton(self.union_data)
+		self.props_button = QtWidgets.QPushButton(self.unit_data)
 		self.props_button.setMinimumSize(QtCore.QSize(32, 32))
 		self.props_button.setMaximumSize(QtCore.QSize(32, 32))
 		self.props_button.setStyleSheet(
@@ -565,10 +565,10 @@ class FileClipboardUnion(ClipboardUnion):
 		self.props_layout.addWidget(self.props_button)
 
 		self.main_text_layout.addLayout(self.props_layout)
-		self.vertical_layout.addWidget(self.union_data)
+		self.vertical_layout.addWidget(self.unit_data)
 
 
-class LinkClipboardUnion(TextClipboardUnion):
+class LinkClipboardUnit(TextClipboardUnit):
 
 	def __init__(
 			self,
@@ -582,14 +582,14 @@ class LinkClipboardUnion(TextClipboardUnion):
 		self._text: str = self._clipboard.text()
 
 	def _create_widget(self) -> None:
-		"""normalize union: sets standard styles, sets showing text or image"""
-		self._create_standard_clipboard_union()
+		"""normalize unit: sets standard styles, sets showing text or image"""
+		self._create_standard_clipboard_unit()
 		self.text.setText(self._text)
 
-	def _create_standard_clipboard_union(self) -> None:
-		TextClipboardUnion._create_standard_clipboard_union(self)
-		self.union_info_text_label.setText('Link')
-		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap('interface/../sources/images/text-icon.svg'))
+	def _create_standard_clipboard_unit(self) -> None:
+		TextClipboardUnit._create_standard_clipboard_unit(self)
+		self.unit_info_text_label.setText('Link')
+		self.unit_info_text_ico_label.setPixmap(QtGui.QPixmap('interface/../sources/images/text-icon.svg'))
 		self.application_ico.setPixmap(QtGui.QPixmap('interface/../sources/images/open-browser-ico.svg'))
 		self.text.setStyleSheet('color: #0085FF;')
 		font = QtGui.QFont()
@@ -599,7 +599,7 @@ class LinkClipboardUnion(TextClipboardUnion):
 		self.text.setFont(font)
 
 
-class ClipboardUnionFactory:
+class ClipboardUnitFactory:
 
 	def __init__(
 			self,
@@ -613,57 +613,57 @@ class ClipboardUnionFactory:
 
 		self._data: list = []  # can`t use set because QImage is unhashable object
 
-		self._clipboard.dataChanged.connect(self.create_clipboard_union)
+		self._clipboard.dataChanged.connect(self.create_clipboard_unit)
 
-	def create_clipboard_union(self) -> None:
+	def create_clipboard_unit(self) -> None:
 		file_urls, image, text = self._get_data_from_clipboard()
 
 		if text in self._data or image in self._data or file_urls in self._data:
 			# if data already in clipboard, skip it
 			pass
 		else:
-			# add union to all_unions_scrollarea_content
+			# add unit to all_units_scrollarea_content
 
 			if self._clipboard.mimeData().urls():
 				# if we have url in urls list -> user copied file
 				self._data.append(file_urls)
-				self._create_clipboard_union(self._layouts['all_unions'], FileClipboardUnion)
-				self._create_clipboard_union(self._layouts['file'], FileClipboardUnion)
+				self._create_clipboard_unit(self._layouts['all_units'], FileClipboardUnit)
+				self._create_clipboard_unit(self._layouts['file'], FileClipboardUnit)
 
 			elif not self._clipboard.pixmap().isNull():
 				# if copied data is image
 				self._data.append(image)
-				self._create_clipboard_union(self._layouts['all_unions'], StandardImageClipboardUnion)
-				self._create_clipboard_union(self._layouts['image'], ImageClipboardUnion)
+				self._create_clipboard_unit(self._layouts['all_units'], StandardImageClipboardUnit)
+				self._create_clipboard_unit(self._layouts['image'], ImageClipboardUnit)
 
 			elif text:
 				if validators.url(text):
 					# if text looks like link
-					self._create_clipboard_union(self._layouts['all_unions'], LinkClipboardUnion)
-					self._create_clipboard_union(self._layouts['link'], LinkClipboardUnion)
+					self._create_clipboard_unit(self._layouts['all_units'], LinkClipboardUnit)
+					self._create_clipboard_unit(self._layouts['link'], LinkClipboardUnit)
 				else:
 					# just simple text
-					self._create_clipboard_union(self._layouts['all_unions'], TextClipboardUnion)
-					self._create_clipboard_union(self._layouts['text'], TextClipboardUnion)
+					self._create_clipboard_unit(self._layouts['all_units'], TextClipboardUnit)
+					self._create_clipboard_unit(self._layouts['text'], TextClipboardUnit)
 
 				self._data.append(text)
 
 			else:
 				raise TypeError('Now supports only text, image and files')
 
-	def _create_clipboard_union(self, parent: QtWidgets.QWidget, union_class: type(ClipboardUnion)) -> None:
+	def _create_clipboard_unit(self, parent: QtWidgets.QWidget, unit_class: type(ClipboardUnit)) -> None:
 		"""
 		:param parent:
-		:param union_class: link to class that you want to create
+		:param unit_class: link to class that you want to create
 		:return:
 		"""
 		layout = parent.layout()
-		union = union_class(parent, self._clipboard, self._parent_window)
-		layout.insertWidget(0, union)
-		self._append_unions_to_all_unions(union)
+		unit = unit_class(parent, self._clipboard, self._parent_window)
+		layout.insertWidget(0, unit)
+		self._append_units_to_all_units(unit)
 
-	def _append_unions_to_all_unions(self, union: ClipboardUnion) -> None:
-		self._parent_window.all_unions.add(union)
+	def _append_units_to_all_units(self, unit: ClipboardUnit) -> None:
+		self._parent_window.all_units.add(unit)
 
 	def _get_data_from_clipboard(self) -> (list[str], QtGui.QImage, str):
 		"""gets all data, that can be copied from clipboard"""
