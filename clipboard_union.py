@@ -158,18 +158,18 @@ class TextClipboardUnion(ClipboardUnion):
 		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap("interface/../sources/images/text-icon.svg"))
 
 		self.union_info_layout.addWidget(self.union_info_text_ico_label)
-		self.union_info_text_ico_label = QtWidgets.QLabel(self.union_info)
+		self.union_info_text_label = QtWidgets.QLabel(self.union_info)
 
 		font = QtGui.QFont()
 		font.setFamily("Roboto")
 		font.setBold(False)
 		font.setWeight(50)
 
-		self.union_info_text_ico_label.setFont(font)
-		self.union_info_text_ico_label.setStyleSheet("color: #FFFFFF;")
-		self.union_info_text_ico_label.setText('Text')
+		self.union_info_text_label.setFont(font)
+		self.union_info_text_label.setStyleSheet("color: #FFFFFF;")
+		self.union_info_text_label.setText('Text')
 
-		self.union_info_layout.addWidget(self.union_info_text_ico_label)
+		self.union_info_layout.addWidget(self.union_info_text_label)
 
 		spacer_item = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
 		self.union_info_layout.addItem(spacer_item)
@@ -552,75 +552,18 @@ class LinkClipboardUnion(TextClipboardUnion):
 		"""normalize union: sets standard styles, sets showing text or image"""
 		self._create_standard_clipboard_union()
 		self.text.setText(self._text)
-		self.set_application_icon()
 
 	def _create_standard_clipboard_union(self) -> None:
-		self.setMinimumSize(QtCore.QSize(0, 100))
-		self.setMaximumSize(QtCore.QSize(16777215, 100))
-		self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-		self.setStyleSheet(
-			"QPushButton{\n"
-			"    border: 2px solid #313131;\n"
-			"    color: #fff;\n"
-			"    border-radius: 10px;\n"
-			"    background-color: #414141;\n"
-			"    text-align:left top;\n"
-			"    padding: 21px 70px 21px 20px;\n"
-			"}\n"
-			"\n"
-			"QPushButton:hover{\n"
-			"    border: 2px solid #08ffc8;\n"
-			"}\n"
-			"\n"
-			"QPushButton:pressed{\n"
-			"    background-color: #313131;\n"
-			"    border: 2px solid #08ffc8;\n"
-			"}"
-		)
-
-		self.horizontal_layout = QtWidgets.QHBoxLayout(self)
-		self.horizontal_layout.setContentsMargins(0, 0, 0, 0)
-
-		self.props = QtWidgets.QWidget(self)
-		self.props.setMinimumSize(QtCore.QSize(62, 0))
-		self.props.setMaximumSize(QtCore.QSize(40, 16777215))
-		self.props.setStyleSheet("margin: 0px 10px 0 0;")
-
-		self.verticalLayout = QtWidgets.QVBoxLayout(self.props)
-		self.verticalLayout.setContentsMargins(0, 7, 0, 10)
-		self.verticalLayout.setSpacing(0)
-
-		self.datetime = QtWidgets.QLabel(self.props)
-		self.font = QtGui.QFont()
-		self.font.setPointSize(9)
-		self.datetime.setFont(self.font)
-		self.datetime.setStyleSheet("color: #fff;")
-		self.datetime.setAlignment(QtCore.Qt.AlignCenter)
-		time_string = time.strftime('%H:%M', time.localtime())
-		self.datetime.setText(time_string)
-
-		self.verticalLayout.addWidget(self.datetime)
-
-		self.logo = QtWidgets.QLabel(self.props)
-		self.logo.setMinimumSize(QtCore.QSize(32, 32))
-		self.logo.setAlignment(QtCore.Qt.AlignCenter)
-		self.logo.setText("")
-
-		self.verticalLayout.addWidget(self.logo)
-		self.horizontal_layout.addWidget(self.props)
-
-		self.text = QtWidgets.QLabel(self)
-		self.text.setMinimumSize(QtCore.QSize(150, 100))
-		self.text.setStyleSheet(
-			"color: #41b6e6;\n"
-			"text-align:left top;\n"
-			"padding: 22px 20px 22px 10px;"
-		)
-		self.text.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
-		self.text.setWordWrap(True)
-		self.text.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-
-		self.horizontal_layout.insertWidget(0, self.text)
+		TextClipboardUnion._create_standard_clipboard_union(self)
+		self.union_info_text_label.setText('Link')
+		self.union_info_text_ico_label.setPixmap(QtGui.QPixmap('interface/../sources/images/text-icon.svg'))
+		self.application_ico.setPixmap(QtGui.QPixmap('interface/../sources/images/open-browser-ico.svg'))
+		self.text.setStyleSheet('color: #0085FF;')
+		font = QtGui.QFont()
+		font.setFamily("DejaVu Sans")
+		font.setPointSize(12)
+		font.setUnderline(True)
+		self.text.setFont(font)
 
 
 class ClipboardUnionFactory:
