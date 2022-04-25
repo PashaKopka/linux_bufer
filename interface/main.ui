@@ -524,8 +524,8 @@ padding: 22px 20px 22px 10px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>100</width>
-               <height>30</height>
+               <width>290</width>
+               <height>308</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -608,8 +608,8 @@ padding: 22px 20px 22px 10px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>145</width>
-               <height>206</height>
+               <width>290</width>
+               <height>308</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -811,8 +811,8 @@ text-align:left top;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>242</width>
-               <height>146</height>
+               <width>290</width>
+               <height>308</height>
               </rect>
              </property>
              <property name="class" stdset="0">
@@ -1052,8 +1052,8 @@ padding: 22px 20px 22px 0px;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>222</width>
-               <height>146</height>
+               <width>290</width>
+               <height>308</height>
               </rect>
              </property>
              <property name="class" stdset="0">

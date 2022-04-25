@@ -1,10 +1,10 @@
 import sys
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 
-from clipboard_union import ClipboardUnionFactory
+from clipboard_unit import ClipboardUnitFactory, ClipboardUnit
 from config import ACTIVATE_HOTKEY
 from ui.main import Ui_Form as MainUI
 from pynput import keyboard
@@ -59,7 +59,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.shortcuts = {
 			ACTIVATE_HOTKEY: self.show_window,
 		}
-		self.all_unions: set[QtWidgets.QPushButton] = set()
+		self.all_units: set[ClipboardUnit] = set()
 
 		# set window parameters
 		self._setup_window()
@@ -69,22 +69,22 @@ class MainWindow(QtWidgets.QWidget):
 
 		# layouts links
 		self._layouts = {
-			'all_unions': self.ui.all_unions_scrollarea_content,
-			'text': self.ui.text_scrollarea_content,
-			'image': self.ui.images_scrollarea_content,
-			'file': self.ui.files_scrollarea_content,
-			'link': self.ui.links_scrollarea_content
+			'all_units': self.ui.all_units_scrollarea_content,
+			'text': self.ui.text_units_scrollarea_content,
+			'image': self.ui.images_units_scrollarea_content,
+			'file': self.ui.files_units_scrollarea_content,
+			'link': self.ui.links_units_scrollarea_content
 		}
-		# activate clipboard handler and clipboard unions factory
+		# activate clipboard handler and clipboard units factory
 		self._clipboard = QtWidgets.QApplication.clipboard()
-		self._clipboard_union_factory = ClipboardUnionFactory(
+		self._clipboard_unit_factory = ClipboardUnitFactory(
 			self._clipboard,
 			parent_window=self,
 			layouts=self._layouts
 		)
 
 		# activate search
-		self.ui.searchbar.textChanged.connect(self._search_unions)
+		self.ui.searchbar.textChanged.connect(self._search_units)
 
 	def show_window(self) -> None:
 		"""
@@ -110,21 +110,30 @@ class MainWindow(QtWidgets.QWidget):
 		"""
 		setup standard main window settings
 		"""
+		# general window settings
 		flags = Qt.FramelessWindowHint
 		flags |= Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
-	def _search_unions(self, text: str) -> None:
+		# set shadow effect for tabs
+		grey_shadow_effect = QtWidgets.QGraphicsDropShadowEffect()
+		grey_shadow_effect.setBlurRadius(7)
+		grey_shadow_effect.setColor(QtGui.QColor(88, 91, 100, 120))
+		grey_shadow_effect.setXOffset(0)
+		grey_shadow_effect.setYOffset(4)
+		self.ui.tabWidget.tabBar().setGraphicsEffect(grey_shadow_effect)
+
+	def _search_units(self, text: str) -> None:
 		"""
-		function for searching unions
+		function for searching units
 		just show widget if it has text, that user typed in self.ui.searchbar
 		"""
-		for union in self.all_unions:
-			if union.has_text(text):
-				union.show()
+		for unit in self.all_units:
+			if unit.has_text(text):
+				unit.show()
 			else:
-				union.hide()
+				unit.hide()
 
 	def event(self, event: QtCore.QEvent) -> bool:
 		"""
