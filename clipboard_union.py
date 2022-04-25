@@ -282,10 +282,8 @@ class StandardImageClipboardUnion(ClipboardUnion):
 
 		# set icon
 		size = QtCore.QSize(262, 160)
-		self._pixel_map = self._pixel_map.scaled(size, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
-		# self.image.setMinimumSize(size.width(), size.height())
-		# self.image.setMaximumSize(size.width(), size.height())
-		self.image.setPixmap(self._pixel_map)
+		pixel_map = self._pixel_map.scaled(size, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
+		self.image.setPixmap(pixel_map)
 
 	def _create_standard_clipboard_union(self) -> None:
 		self.setMinimumSize(QtCore.QSize(0, 132))
@@ -374,6 +372,41 @@ class StandardImageClipboardUnion(ClipboardUnion):
 
 		self.main_text_layout.addWidget(self.image)
 		self.vertical_layout.addWidget(self.union_data)
+
+
+class ImageClipboardUnion(StandardImageClipboardUnion):
+
+	def __init__(
+			self,
+			parent: QtWidgets.QWidget,
+			clipboard: QtGui.QClipboard,
+			parent_window: QtWidgets.QWidget
+	):
+		super(ImageClipboardUnion, self).__init__(parent, clipboard, parent_window)
+
+	def _create_standard_clipboard_union(self) -> None:
+		StandardImageClipboardUnion._create_standard_clipboard_union(self)
+
+		# calculate height for image
+		pixel_map_old_size = self._pixel_map.size()
+		if pixel_map_old_size.height() < 260:
+			pixel_map_height = pixel_map_old_size.height()
+		else:
+			pixel_map_height = 260
+
+		# set minimum size of image: if image.height less than 260 -> image.height
+		self.image.setMinimumSize(0, pixel_map_height)
+
+		# set pixel map for label
+		pixel_map = self._pixel_map.scaledToHeight(pixel_map_height)
+		self.image.setPixmap(pixel_map)
+
+		# calculate height of union
+		if pixel_map_height + 40 < 300:
+			union_height = pixel_map_height + 40
+		else:
+			union_height = 300
+		self.setFixedSize(QtCore.QSize(16777215, union_height))
 
 
 class FileClipboardUnion(ClipboardUnion):
@@ -601,7 +634,7 @@ class ClipboardUnionFactory:
 				# if copied data is image
 				self._data.append(image)
 				self._create_clipboard_union(self._layouts['all_unions'], StandardImageClipboardUnion)
-				self._create_clipboard_union(self._layouts['image'], StandardImageClipboardUnion)
+				self._create_clipboard_union(self._layouts['image'], ImageClipboardUnion)
 
 			elif text:
 				if validators.url(text):

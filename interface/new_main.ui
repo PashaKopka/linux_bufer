@@ -1336,6 +1336,21 @@ border-radius: 1px;</string>
             <string>Text</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QScrollArea" name="scrollArea_2">
               <property name="widgetResizable">
@@ -1346,9 +1361,12 @@ border-radius: 1px;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>290</width>
-                 <height>389</height>
+                 <width>308</width>
+                 <height>407</height>
                 </rect>
+               </property>
+               <property name="class" stdset="0">
+                <string>scrollarea_content</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_11">
                 <property name="spacing">
@@ -1390,6 +1408,21 @@ border-radius: 1px;</string>
             <string>Images</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QScrollArea" name="scrollArea_3">
               <property name="widgetResizable">
@@ -1400,9 +1433,12 @@ border-radius: 1px;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>290</width>
-                 <height>389</height>
+                 <width>308</width>
+                 <height>407</height>
                 </rect>
+               </property>
+               <property name="class" stdset="0">
+                <string>scrollarea_content</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_14">
                 <property name="spacing">
@@ -1444,6 +1480,21 @@ border-radius: 1px;</string>
             <string>Files</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_6">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QScrollArea" name="scrollArea_4">
               <property name="widgetResizable">
@@ -1454,9 +1505,12 @@ border-radius: 1px;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>290</width>
-                 <height>389</height>
+                 <width>308</width>
+                 <height>407</height>
                 </rect>
+               </property>
+               <property name="class" stdset="0">
+                <string>scrollarea_content</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_15">
                 <property name="spacing">
@@ -1498,6 +1552,21 @@ border-radius: 1px;</string>
             <string>Links</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_7">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QScrollArea" name="scrollArea_5">
               <property name="widgetResizable">
@@ -1508,9 +1577,12 @@ border-radius: 1px;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>290</width>
-                 <height>389</height>
+                 <width>308</width>
+                 <height>407</height>
                 </rect>
+               </property>
+               <property name="class" stdset="0">
+                <string>scrollarea_content</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_16">
                 <property name="spacing">
