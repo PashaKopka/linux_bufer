@@ -22,7 +22,7 @@
 ### TODO
 
 - [ ] make show_window and hide_window override
-- [ ] show content by clicking on middle mouse
+- [x] show content by clicking on middle mouse
   - [ ] copy some **(not all)** text from details window
 - [ ] create orange shadow effect for current tab button
 - [ ] context menus for unions:

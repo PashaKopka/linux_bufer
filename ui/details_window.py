@@ -17,7 +17,9 @@ class Ui_Frame(object):
         Frame.resize(425, 315)
         Frame.setMinimumSize(QtCore.QSize(425, 315))
         Frame.setMaximumSize(QtCore.QSize(425, 315))
-        Frame.setStyleSheet("background-color: #585B64;")
+        Frame.setStyleSheet("background-color: #585B64;\n"
+"border-radius: 10px;\n"
+"border: 2px solid #313131;")
         self.verticalLayout = QtWidgets.QVBoxLayout(Frame)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
@@ -92,7 +94,8 @@ class Ui_Frame(object):
         font.setBold(False)
         font.setWeight(50)
         self.content.setFont(font)
-        self.content.setStyleSheet("color: #FFF;")
+        self.content.setStyleSheet("color: #FFF;\n"
+"border: 0px solid #000;")
         self.content.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.content.setObjectName("content")
         self.verticalLayout_2.addWidget(self.content)
@@ -105,4 +108,5 @@ class Ui_Frame(object):
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
+        Frame.setProperty("class", _translate("Frame", "details_window"))
         self.content.setText(_translate("Frame", "<html><head/><body><p>TextLabel</p><p>TextLabel</p><p>TextLabel</p><p>TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel</p><p><br/></p><p>TextLabel</p><p>TextLabelv</p><p><br/></p><p>v</p><p>v</p><p>TextLabel</p><p>TextLabel</p><p>vvTextLabelvTextLabel</p><p>TextLabelTextLabelv</p><p><br/></p><p>TextLabel</p><p>TextLabel</p><p>TextLabel</p><p>TextLabel</p><p>v</p><p>TextLabel</p><p>TextLabel</p><p>TextLabel</p><p>TextLabelTextLabel</p><p>TextLabel</p><p>TextLabelTextLabel</p></body></html>"))

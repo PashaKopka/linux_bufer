@@ -26,7 +26,12 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #585B64;</string>
+   <string notr="true">background-color: #585B64;
+border-radius: 10px;
+border: 2px solid #313131;</string>
+  </property>
+  <property name="class" stdset="0">
+   <string>details_window</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -142,7 +147,8 @@ QScrollBar::add-line:horizontal{
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: #FFF;</string>
+          <string notr="true">color: #FFF;
+border: 0px solid #000;</string>
          </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelv&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;vvTextLabelvTextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabelv&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

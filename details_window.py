@@ -22,6 +22,7 @@ class DetailsWindow(QtWidgets.QWidget):
 		flags |= QtCore.Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
+		self.ui.content.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
 	def show_window(self):
 		"""custom method of show, should to use it"""
