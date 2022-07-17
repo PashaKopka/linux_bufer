@@ -60,6 +60,10 @@ class MainWindow(QtWidgets.QWidget):
 			ACTIVATE_HOTKEY: self.show_window,
 		}
 		self.all_units: set[ClipboardUnit] = set()
+		self._hide_window = True
+		self._window_active = True
+		self.mouse_in = False  # if mouse over the main window -> mouse_in == True
+		# TODO This is crutch, maybe change it letter
 
 		# set window parameters
 		self._setup_window()
@@ -97,7 +101,21 @@ class MainWindow(QtWidgets.QWidget):
 		self.activateWindow()
 
 	def hide_window(self) -> None:
+		for unit in self.all_units:
+			unit.hide_details_window()
 		self.hide()
+
+	def dont_hide_window_this_time(self):
+		self._hide_window = False
+
+	def activate_window(self):
+		self._window_active = True
+
+	def deactivate_window(self):
+		self._window_active = False
+
+	def is_window_active(self):
+		return self._window_active
 
 	def _activate_shortcuts(self) -> None:
 		"""
@@ -112,11 +130,12 @@ class MainWindow(QtWidgets.QWidget):
 		"""
 		# general window settings
 		flags = Qt.FramelessWindowHint
-		flags |= Qt.WindowStaysOnTopHint
+		# flags |= Qt.WindowStaysOnTopHint
 		self.setWindowFlags(flags)
 		self.setAttribute(Qt.WA_TranslucentBackground)
 
 		# set shadow effect for tabs
+		# TODO extract method
 		grey_shadow_effect = QtWidgets.QGraphicsDropShadowEffect()
 		grey_shadow_effect.setBlurRadius(7)
 		grey_shadow_effect.setColor(QtGui.QColor(88, 91, 100, 120))
@@ -140,11 +159,20 @@ class MainWindow(QtWidgets.QWidget):
 		override event handler
 		"""
 		if event.type() == QtCore.QEvent.WindowDeactivate:
-			# when click out of window
-			self.hide()
-		elif event.type() == QtCore.QEvent.Hide:
-			self.event(QtCore.QEvent(QtCore.QEvent.WindowDeactivate))
+			# when click outside of window
+			# if you want to not hide window once you can call dont_hide_window_this_time method
+			# then _hide_window becomes False and window will not hide once
+			if self._hide_window:
+				self.hide_window()
+			else:
+				self._hide_window = True
 		return super().event(event)
+
+	def enterEvent(self, a0: QtCore.QEvent) -> None:
+		self.mouse_in = True
+
+	def leaveEvent(self, a0: QtCore.QEvent) -> None:
+		self.mouse_in = False
 
 
 if __name__ == '__main__':

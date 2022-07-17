@@ -21,6 +21,9 @@
 
 ### TODO
 
+- [ ] make show_window and hide_window override
+- [ ] show content by clicking on middle mouse
+  - [ ] copy some **(not all)** text from details window
 - [ ] create orange shadow effect for current tab button
 - [ ] context menus for unions:
   - [ ] image: save image, edit image
@@ -30,7 +33,7 @@
 - [ ] add pin function:
   - user can pin union and then, when user clicked on `pinned widgets` button, user see only pinned unions
   - pinned widgets saves to memory
-- [ ] create new design for application
+- [x] create new design for application
 - [ ] add possibility to resize window
 - [ ] add settings of different functions
   - [ ] save all unions

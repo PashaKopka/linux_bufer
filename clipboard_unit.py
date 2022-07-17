@@ -6,13 +6,20 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from pynput import keyboard
 
 from config import HIDING_TIME
+from details_window import DetailsWindow
 
 
 class ClipboardUnit(QtWidgets.QPushButton):
 	# can`t use AbstractClipboardUnit(ABC)
 
-	def __init__(self, parent: QtWidgets.QWidget):
+	def __init__(
+			self,
+			parent: QtWidgets.QWidget,
+			parent_window: QtWidgets.QWidget
+	):
 		super().__init__(parent)
+		self._details_window = DetailsWindow(parent_window)
+		self._parent_window = parent_window
 
 	def paste(self) -> None:
 		"""
@@ -56,6 +63,24 @@ class ClipboardUnit(QtWidgets.QPushButton):
 		icon_pixmap = QtGui.QPixmap().fromImage(image)
 		self.application_ico.setPixmap(icon_pixmap)
 
+	def mouseReleaseEvent(self, e: QtGui.QMouseEvent) -> None:
+		if e.button() == QtCore.Qt.MiddleButton:
+			# show details window near the mouse cursor
+			self._parent_window.dont_hide_window_this_time()
+			position = QtGui.QCursor.pos()
+			self._details_window.move(position)
+			self._details_window.show_window()
+
+		elif e.button() == QtCore.Qt.LeftButton:
+			# if user click on left mouse button -> paste data
+			if self._parent_window.is_window_active():
+				self.paste()
+			else:
+				self._parent_window.activate_window()
+
+	def hide_details_window(self):
+		self._details_window.hide_window()
+
 	@abc.abstractmethod
 	def has_text(self, text: str) -> bool:
 		"""it is function to check if unit has text inside"""
@@ -85,10 +110,9 @@ class TextClipboardUnit(ClipboardUnit):
 			clipboard: QtGui.QClipboard,
 			parent_window: QtWidgets.QWidget,
 	):
-		super().__init__(parent)
+		super().__init__(parent, parent_window)
 		self.clicked.connect(self.paste)
 		self._clipboard: QtGui.QClipboard = clipboard
-		self._parent_window = parent_window  # Need parent window to hiding it
 
 		self._text: str = self._clipboard.text()
 
