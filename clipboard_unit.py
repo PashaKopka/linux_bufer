@@ -18,7 +18,7 @@ class ClipboardUnit(QtWidgets.QPushButton):
 			parent_window: QtWidgets.QWidget
 	):
 		super().__init__(parent)
-		self._details_window = DetailsWindow(parent_window)
+		self._details_window = DetailsWindow(self, parent_window)
 		self._parent_window = parent_window
 
 	def paste(self) -> None:
@@ -99,6 +99,11 @@ class ClipboardUnit(QtWidgets.QPushButton):
 	@abc.abstractmethod
 	def _create_standard_clipboard_unit(self) -> None:
 		"""all widgets should create own styles, or copy realisation from parent"""
+		pass
+
+	@abc.abstractmethod
+	def is_texted_unit(self) -> bool:
+		"""This method returns boolean that tells that unit is texted"""
 		pass
 
 
@@ -268,6 +273,9 @@ class TextClipboardUnit(ClipboardUnit):
 		self.main_text_layout.addLayout(self.props_layout)
 		self.vertical_layout.addWidget(self.unit_data)
 
+	def is_texted_unit(self):
+		return True
+
 
 class StandardImageClipboardUnit(ClipboardUnit):
 	"""Image clipboard unit if user copied image or make screenshot"""
@@ -278,7 +286,7 @@ class StandardImageClipboardUnit(ClipboardUnit):
 			clipboard: QtGui.QClipboard,
 			parent_window: QtWidgets.QWidget
 	):
-		super().__init__(parent)
+		super().__init__(parent, parent_window)
 		self.clicked.connect(self.paste)
 		self._parent: QtWidgets.QWidget = parent
 		self._clipboard = clipboard
@@ -397,6 +405,12 @@ class StandardImageClipboardUnit(ClipboardUnit):
 		self.main_text_layout.addWidget(self.image)
 		self.vertical_layout.addWidget(self.unit_data)
 
+	def is_texted_unit(self):
+		return False
+
+	def get_pixel_map(self):
+		return self._pixel_map
+
 
 class ImageClipboardUnit(StandardImageClipboardUnit):
 
@@ -411,6 +425,7 @@ class ImageClipboardUnit(StandardImageClipboardUnit):
 	def _create_standard_clipboard_unit(self) -> None:
 		StandardImageClipboardUnit._create_standard_clipboard_unit(self)
 
+		# TODO fix this calculations
 		# calculate height for image
 		pixel_map_old_size = self._pixel_map.size()
 		if pixel_map_old_size.height() < 260:
@@ -432,6 +447,9 @@ class ImageClipboardUnit(StandardImageClipboardUnit):
 			unit_height = 300
 		self.setFixedSize(QtCore.QSize(16777215, unit_height))
 
+	def is_texted_unit(self):
+		return False
+
 
 class FileClipboardUnit(ClipboardUnit):
 	"""Image clipboard unit if user copied file"""
@@ -442,7 +460,7 @@ class FileClipboardUnit(ClipboardUnit):
 			clipboard: QtGui.QClipboard,
 			parent_window: QtWidgets.QWidget
 	):
-		super().__init__(parent)
+		super().__init__(parent, parent_window)
 		self.clicked.connect(self.paste)
 		self._parent: QtWidgets.QWidget = parent
 		self._clipboard = clipboard
@@ -457,6 +475,9 @@ class FileClipboardUnit(ClipboardUnit):
 		if text.lower() in self.text.text():
 			return True
 		return False
+
+	def get_text(self) -> str:
+		return self.text.text()
 
 	def update_clipboard(self) -> None:
 		data = QtCore.QMimeData()
@@ -591,6 +612,9 @@ class FileClipboardUnit(ClipboardUnit):
 		self.main_text_layout.addLayout(self.props_layout)
 		self.vertical_layout.addWidget(self.unit_data)
 
+	def is_texted_unit(self):
+		return True
+
 
 class LinkClipboardUnit(TextClipboardUnit):
 
@@ -621,6 +645,9 @@ class LinkClipboardUnit(TextClipboardUnit):
 		font.setPointSize(12)
 		font.setUnderline(True)
 		self.text.setFont(font)
+
+	def is_texted_unit(self):
+		return True
 
 
 class ClipboardUnitFactory:

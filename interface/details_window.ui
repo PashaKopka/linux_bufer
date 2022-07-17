@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>200</height>
+    <width>425</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>350</width>
-    <height>200</height>
+    <width>425</width>
+    <height>315</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>350</width>
-    <height>200</height>
+    <width>425</width>
+    <height>315</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -46,6 +46,63 @@
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollArea {
+	border: none;
+}
+
+QScrollBar:vertical{
+	border: none;
+	background: transparent;
+	width: 6px;
+	margin: 6px 0 6px 0;
+}
+
+QScrollBar:horizontal{
+	border: none;
+	background: transparent;
+	height: 6px;
+	margin: 0 6px 0 6px;
+}
+
+QScrollBar::handle:vertical{
+	background-color: #a39e9e;
+	border-radius: 3px;
+	min-height: 30px;
+
+}
+
+QScrollBar::handle:horizontal{
+	background-color: #a39e9e;
+	border-radius: 3px;
+	min-width: 30px;
+}
+
+
+QScrollBar::sub-line:vertical{
+	width: 0;
+	height: 0;
+}
+
+QScrollBar::add-line:vertical{
+	width: 0;
+	height: 0;
+}
+
+QScrollBar::sub-line:horizontal{
+	width: 0;
+	height: 0;
+}
+
+QScrollBar::add-line:horizontal{
+	width: 0;
+	height: 0;
+}
+</string>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -54,8 +111,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>348</width>
-        <height>198</height>
+        <width>1499</width>
+        <height>918</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -63,19 +120,19 @@
         <number>0</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>7</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>7</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>7</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>5</number>
        </property>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="content">
          <property name="font">
           <font>
            <family>Roboto</family>
@@ -88,7 +145,7 @@
           <string notr="true">color: #FFF;</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelv&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;vvTextLabelvTextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabelv&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;v&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabelTextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

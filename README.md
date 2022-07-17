@@ -8,13 +8,13 @@
 
 ### Colors:
 
-1. `#525252` - background color
-2. `#414141` - hover
-3. `#313131` - borders
-4. `#08ffc8` - accent color
-5. `#1ee3cf` - more accent color
-6. `#a39e9e` - light background
-6. `#1F6ED4` - blue (links for example)
+1. `#525252` - background color  ![#525252](https://via.placeholder.com/15/525252/525252.png)
+2. `#414141` - hover  ![#414141](https://via.placeholder.com/15/414141/414141.png)
+3. `#313131` - borders  ![#313131](https://via.placeholder.com/15/313131/313131.png)
+4. `#08ffc8` - accent color  ![#08ffc8](https://via.placeholder.com/15/08ffc8/08ffc8.png)
+5. `#1ee3cf` - more accent color  ![#1ee3cf](https://via.placeholder.com/15/1ee3cf/1ee3cf.png)
+6. `#a39e9e` - light background  ![#a39e9e](https://via.placeholder.com/15/a39e9e/a39e9e.png)
+7. `#1F6ED4` - blue (links for example)  ![#1F6ED4](https://via.placeholder.com/15/1F6ED4/1F6ED4.png)
 
 ![img.png](docs/sources/img.png)
 
